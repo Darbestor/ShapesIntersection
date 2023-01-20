@@ -6,7 +6,7 @@ namespace ShapesFilter.Shapes
 {
     public class Triangle : Polygon
     {
-        public Triangle(params PointF[] vertices) : base(vertices)
+        public Triangle(params PointF[] vertices): base(vertices, new BoundingBox(vertices))
         {
             if (vertices.Length != 3)
             {

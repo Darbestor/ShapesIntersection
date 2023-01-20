@@ -6,14 +6,16 @@ namespace ShapesFilter.Shapes
     public class Polygon: IShape
     {
         public PointF[] Vertices { get; }
+        
+        /// <summary>
+        /// Axis-aligned bounding box
+        /// </summary>
+        public BoundingBox AABB { get; }
 
-        public Polygon(params PointF[] vertices)
+        public Polygon(PointF[] vertices, BoundingBox aabb)
         {
             Vertices = vertices;
-        }
-
-        public Polygon(IEnumerable<PointF> boundaries) : this(boundaries.ToArray())
-        {
+            AABB = aabb;
         }
     }
 }
