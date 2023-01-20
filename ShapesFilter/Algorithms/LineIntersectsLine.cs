@@ -1,6 +1,7 @@
-﻿using ShapesFilter.Shapes;
+﻿using ShapesFilter.Algorithm;
+using ShapesFilter.Shapes;
 
-namespace ShapesFilter.Algorithm
+namespace ShapesFilter.Algorithms
 {
     public class LineIntersectsLine: IIntersectValidator<Line, Line>
     {
