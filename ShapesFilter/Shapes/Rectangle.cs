@@ -2,13 +2,13 @@
 {
     public class Rectangle: IShape
     {
-        public PointF Min { get; }
-        public PointF Max { get; }
+        public PointF TopLeft { get; }
+        public PointF BottomRight { get; }
 
         public Rectangle(PointF topLeft, PointF bottomRight)
         {
-            Min = topLeft;
-            Max = bottomRight;
+            TopLeft = topLeft;
+            BottomRight = bottomRight;
         }
 
         public Rectangle(PointF topLeft, float width, float height) : this(topLeft,
@@ -16,7 +16,7 @@
         {
         }
 
-        public Rectangle(float top, float left, float width, float height) : this(new PointF(top, left), width, height)
+        public Rectangle(float top, float left, float width, float height) : this(new PointF(left, top), width, height)
         {
         }
     }
