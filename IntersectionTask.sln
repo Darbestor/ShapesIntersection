@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntersectionTask", "IntersectionTask\IntersectionTask.csproj", "{41A2F497-32D7-488E-B0C4-2E46C7BAF557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesFilter", "ShapesFilter\ShapesFilter.csproj", "{7C15A06B-8658-4366-9103-7570062CA0E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesFilterTests", "ShapesFilterTests\ShapesFilterTests.csproj", "{CBB978BA-12F6-4922-A480-DA2BEB25C3B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{41A2F497-32D7-488E-B0C4-2E46C7BAF557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41A2F497-32D7-488E-B0C4-2E46C7BAF557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41A2F497-32D7-488E-B0C4-2E46C7BAF557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C15A06B-8658-4366-9103-7570062CA0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C15A06B-8658-4366-9103-7570062CA0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C15A06B-8658-4366-9103-7570062CA0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C15A06B-8658-4366-9103-7570062CA0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB978BA-12F6-4922-A480-DA2BEB25C3B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB978BA-12F6-4922-A480-DA2BEB25C3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB978BA-12F6-4922-A480-DA2BEB25C3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB978BA-12F6-4922-A480-DA2BEB25C3B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
