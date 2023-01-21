@@ -15,5 +15,6 @@
         public abstract BoundingBox AABB { get; }
 
         public abstract float Area { get; }
+        public virtual ShapeType ShapeType => ShapeType.Polygon;
     }
 }
