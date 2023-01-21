@@ -1,4 +1,5 @@
 ﻿using System;
+using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
@@ -6,10 +7,10 @@ namespace ShapesFilter.Algorithms
 {
     public class CircleIntersectsPolygon : IIntersectValidator
     {
-        private readonly IIntersectValidator _lineCircleValidator;
+        private readonly LineIntersectsCircle _lineCircleValidator;
         private readonly IPointInside<Polygon> _pointValidator;
 
-        public CircleIntersectsPolygon(IIntersectValidator lineCircleValidator,
+        public CircleIntersectsPolygon(LineIntersectsCircle lineCircleValidator,
             IPointInside<Polygon> pointValidator)
         {
             _lineCircleValidator = lineCircleValidator;

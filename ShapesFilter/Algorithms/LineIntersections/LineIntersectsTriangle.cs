@@ -6,10 +6,10 @@ namespace ShapesFilter.Algorithms.LineIntersections
 {
     public class LineIntersectsTriangle : IIntersectValidator
     {
-        private readonly IIntersectValidator _lineIntersectValidator;
+        private readonly LineIntersectsLine _lineIntersectValidator;
         private readonly IPointInside<Triangle> _pointValidator;
 
-        public LineIntersectsTriangle(IIntersectValidator lineIntersectValidator,
+        public LineIntersectsTriangle(LineIntersectsLine lineIntersectValidator,
             IPointInside<Triangle> pointValidator)
         {
             _lineIntersectValidator = lineIntersectValidator;
