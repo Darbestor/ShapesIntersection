@@ -1,38 +1,24 @@
-﻿using ShapesFilter.Shapes;
+﻿using ShapesFilter.Algorithms.PointInside;
+using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class LineIntersectsTriangle: IIntersectValidator<Line, Triangle>
+    public class LineIntersectsTriangle : IIntersectValidator<Line, Triangle>
     {
         private readonly LineIntersectsLine _lineIntersectValidator;
+        private readonly IPointInside<Triangle> _pointValidator;
 
-        public LineIntersectsTriangle(LineIntersectsLine lineIntersectValidator)
+        public LineIntersectsTriangle(LineIntersectsLine lineIntersectValidator, IPointInside<Triangle> pointValidator)
         {
             _lineIntersectValidator = lineIntersectValidator;
+            _pointValidator = pointValidator;
         }
 
-        private bool IsInside(PointF target, Triangle triangle)
-        {
-            var v1 = triangle.Vertices[0];
-            var v2 = triangle.Vertices[1];
-            var v3 = triangle.Vertices[2];
-            
-            var s = (v1.X - v3.X) * (target.Y - v3.Y) - (v1.Y - v3.Y) * (target.X - v3.X);
-            var t = (v2.X - v1.X) * (target.Y - v1.Y) - (v2.Y - v1.Y) * (target.X - v1.X);
-
-            if ((s < 0) != (t < 0) && s != 0 && t != 0)
-                return false;
-
-            var d = (v3.X - v2.X) * (target.Y - v2.Y) - (v3.Y - v2.Y) * (target.X - v2.X);
-            return d == 0 || (d < 0) == (s + t <= 0);
-        }
-
-        
         public bool Intersect(Line line, Triangle triangle)
         {
             return Intersect(line.P1, line.P2, triangle);
         }
-        
+
         public bool Intersect(PointF point1, PointF point2, Triangle triangle)
         {
             var vertices = triangle.Vertices;
@@ -45,7 +31,7 @@ namespace ShapesFilter.Algorithms
                 }
             }
 
-            return IsInside(point1, triangle);
+            return _pointValidator.IsInside(point1, triangle);
         }
     }
 }

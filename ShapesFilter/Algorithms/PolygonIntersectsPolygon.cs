@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
@@ -8,25 +8,26 @@ namespace ShapesFilter.Algorithms
     {
         private readonly RectangleIntersectsRectangle _aabbValidator;
         private readonly LineIntersectsLine _lineValidator;
+        private readonly IPointInside<Polygon> _pointValidator;
 
-        public PolygonIntersectsPolygon(RectangleIntersectsRectangle aabbValidator, LineIntersectsLine lineValidator)
+        public PolygonIntersectsPolygon(RectangleIntersectsRectangle aabbValidator, LineIntersectsLine lineValidator,
+            IPointInside<Polygon> pointValidator)
         {
             _aabbValidator = aabbValidator;
             _lineValidator = lineValidator;
+            _pointValidator = pointValidator;
         }
 
         public bool Intersect(Polygon polygon1, Polygon polygon2)
         {
             if (_aabbValidator.Intersect(polygon1.AABB, polygon2.AABB))
             {
-                var p1Vertices = polygon1.Vertices;
-                var p2Vertices = polygon2.Vertices;
-                
-                if (EdgesIntersect(p1Vertices, p2Vertices))
+                if (EdgesIntersect(polygon1, polygon2))
                 {
                     return true;
                 }
-                if (PointInside(p1Vertices, p2Vertices))
+
+                if (PointInside(polygon1, polygon2))
                 {
                     return true;
                 }
@@ -35,11 +36,13 @@ namespace ShapesFilter.Algorithms
             return false;
         }
 
-        private bool EdgesIntersect(IReadOnlyList<PointF> p1Vertices, IReadOnlyList<PointF> p2Vertices)
+        private bool EdgesIntersect(Polygon p1, Polygon p2)
         {
-            for (var i = 0; i < p1Vertices.Count - 1; i++)
+            var p1Vertices = p1.Vertices;
+            var p2Vertices = p2.Vertices;
+            for (var i = 0; i < p1Vertices.Length - 1; i++)
             {
-                for (var j = 0; j < p2Vertices.Count - 1; j++)
+                for (var j = 0; j < p2Vertices.Length - 1; j++)
                 {
                     if (_lineValidator.Intersect(p1Vertices[i], p1Vertices[i + 1], p2Vertices[j], p2Vertices[j + 1]))
                     {
@@ -51,27 +54,10 @@ namespace ShapesFilter.Algorithms
             return false;
         }
 
-        private bool PointInside(PointF[] p1Vertices, PointF[] p2Vertices)
+        private bool PointInside(Polygon p1, Polygon p2)
         {
-            return p1Vertices.Any(p => IsInside(p2Vertices, p)) || p2Vertices.Any(p => IsInside(p1Vertices, p));
-        }
-
-        private bool IsInside(IReadOnlyList<PointF> polygon, PointF point)
-        {
-            bool result = false;
-            int j = polygon.Count - 1;
-            for (int i = 0; i < polygon.Count; i++)
-            {
-                if (polygon[i].Y < point.Y && polygon[j].Y >= point.Y || polygon[j].Y < point.Y && polygon[i].Y >= point.Y)
-                {
-                    if (polygon[i].X + (point.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) * (polygon[j].X - polygon[i].X) < point.X)
-                    {
-                        result = !result;
-                    }
-                }
-                j = i;
-            }
-            return result;
+            return p1.Vertices.Any(v => _pointValidator.IsInside(v, p2)) ||
+                   p2.Vertices.Any(v => _pointValidator.IsInside(v, p1));
         }
     }
 }

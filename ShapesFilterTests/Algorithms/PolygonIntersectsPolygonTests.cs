@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ShapesFilter.Algorithms;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class PolygonIntersectsPolygonTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new PolygonIntersectsPolygon(new RectangleIntersectsRectangle(), new LineIntersectsLine(),
+                new PointInsidePolygon());
+        }
+
+        private PolygonIntersectsPolygon _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(
@@ -27,10 +38,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Polygon p1, Polygon p2)
         {
-            var alg = new PolygonIntersectsPolygon(new RectangleIntersectsRectangle(),
-                new LineIntersectsLine());
-
-            Assert.True(alg.Intersect(p1, p2));
+            Assert.That(_algorithm.Intersect(p1, p2), Is.True);
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -50,10 +58,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Polygon p1, Polygon p2)
         {
-            var alg = new PolygonIntersectsPolygon(new RectangleIntersectsRectangle(),
-                new LineIntersectsLine());
-
-            Assert.True(alg.Intersect(p1, p2));
+            Assert.That(_algorithm.Intersect(p1, p2), Is.True);
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersect()
@@ -79,10 +84,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersect))]
         public void TestDoNotIntersect(Polygon p1, Polygon p2)
         {
-            var alg = new PolygonIntersectsPolygon(new RectangleIntersectsRectangle(),
-                new LineIntersectsLine());
-
-            Assert.False(alg.Intersect(p1, p2));
+            Assert.That(_algorithm.Intersect(p1, p2), Is.False);
         }
     }
 }
