@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
-using ShapesFilter;
 using ShapesFilter.Algorithms;
 using ShapesFilter.Shapes;
 
-namespace ShapesFilterTests.Algorithm
+namespace ShapesFilterTests.Algorithms
 {
     public class RectangleIntersectsRectangleTests
     {

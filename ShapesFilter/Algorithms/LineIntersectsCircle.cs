@@ -7,60 +7,39 @@ namespace ShapesFilter.Algorithms
     {
         public bool Intersect(Line line, Circle circle)
         {
-            double y;
-            double B, C, D;
-            var (m, c) = (line.Slope, line.YIntercept);
-            var (p, q, r) = (circle.Center.X, circle.Center.Y, circle.Radius);
+            // is either end INSIDE the circle?
+            // if so, return true immediately
+            var inside1 = PointInCircle(line.P1, circle);
+            var inside2 = PointInCircle(line.P2, circle);
+            if (inside1 || inside2) return true;
 
-            if (line.IsVertical)
-            {
-                double x = line.P1.X;
-                B = -2 * q;
-                C = p * p + q * q - r * r + x * x - 2 * p * x;
-                D = B * B - 4 * C;
-                if (D == 0)
-                {
-                    if (GetDistance(line.P1, circle.Center) < r || GetDistance(line.P2, circle.Center) < r)
-                    {
-                        return true;
-                    }
+            var v1X = line.P2.X - line.P1.X;
+            var v1Y = line.P2.Y - line.P1.Y;
+            var v2X = line.P1.X - circle.Center.X;
+            var v2Y = line.P1.Y - circle.Center.Y;
+            var b = (v1X * v2X + v1Y * v2Y);
+            var c = 2 * (v1X * v1X + v1Y * v1Y);
+            b *= -2;
+            var d = Math.Sqrt(b * b - 2 * c * (v2X * v2X + v2Y * v2Y - circle.Radius * circle.Radius));
 
-                    return false;
-                }
+            if (!(d > 0)) return false;
 
-                if (D > 0)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                var A = m * m + 1;
-                B = 2 * (m * c - m * q - p);
-                C = p * p + q * q - r * r + c * c - 2 * c * q;
-                D = B * B - 4 * A * C;
-                if (D == 0)
-                {
-                    if (GetDistance(line.P1, circle.Center) < r || GetDistance(line.P2, circle.Center) < r)
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-
-                if (D > 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            var u1 = (b - d) / c; // these represent the unit distance of point one and two on the line
+            var u2 = (b + d) / c;
+            return (u1 <= 1 && u1 >= 0) || (u2 <= 1 && u2 >= 0); // if point on the line segment
         }
 
-        private double GetDistance(PointF p1, PointF p2)
+        private bool PointInCircle(PointF p, Circle c)
         {
-            return Math.Pow((p1.X - p2.X), 2) + Math.Pow((p1.Y - p2.Y), 2);
+            // get distance between the point and circle's center
+            // using the Pythagorean Theorem
+            float distX = p.X - c.Center.X;
+            float distY = p.Y - c.Center.Y;
+            float distance = MathF.Sqrt((distX * distX) + (distY * distY));
+
+            // if the distance is less than the circle's 
+            // radius the point is inside!
+            return distance <= c.Radius;
         }
     }
 }
