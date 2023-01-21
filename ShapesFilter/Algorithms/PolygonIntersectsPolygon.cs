@@ -6,11 +6,12 @@ namespace ShapesFilter.Algorithms
 {
     public class PolygonIntersectsPolygon : IIntersectValidator<Polygon, Polygon>
     {
-        private readonly RectangleIntersectsRectangle _aabbValidator;
-        private readonly LineIntersectsLine _lineValidator;
+        private readonly IIntersectValidator<BoundingBox, BoundingBox> _aabbValidator;
+        private readonly IIntersectValidator<Line, Line> _lineValidator;
         private readonly IPointInside<Polygon> _pointValidator;
 
-        public PolygonIntersectsPolygon(RectangleIntersectsRectangle aabbValidator, LineIntersectsLine lineValidator,
+        public PolygonIntersectsPolygon(IIntersectValidator<BoundingBox, BoundingBox> aabbValidator,
+            IIntersectValidator<Line, Line> lineValidator,
             IPointInside<Polygon> pointValidator)
         {
             _aabbValidator = aabbValidator;
@@ -20,19 +21,14 @@ namespace ShapesFilter.Algorithms
 
         public bool Intersect(Polygon polygon1, Polygon polygon2)
         {
-            if (_aabbValidator.Intersect(polygon1.AABB, polygon2.AABB))
+            if (!_aabbValidator.Intersect(polygon1.AABB, polygon2.AABB)) return false;
+            if (EdgesIntersect(polygon1, polygon2))
             {
-                if (EdgesIntersect(polygon1, polygon2))
-                {
-                    return true;
-                }
-
-                return polygon1.Vertices.Any(v => _pointValidator.IsInside(v, polygon2)) ||
-                       polygon2.Vertices.Any(v => _pointValidator.IsInside(v, polygon1));
-                ;
+                return true;
             }
 
-            return false;
+            return polygon1.Vertices.Any(v => _pointValidator.IsInside(v, polygon2)) ||
+                   polygon2.Vertices.Any(v => _pointValidator.IsInside(v, polygon1));
         }
 
         private bool EdgesIntersect(Polygon p1, Polygon p2)
@@ -43,7 +39,8 @@ namespace ShapesFilter.Algorithms
             {
                 for (var j = 0; j < p2Vertices.Length - 1; j++)
                 {
-                    if (_lineValidator.Intersect(p1Vertices[i], p1Vertices[i + 1], p2Vertices[j], p2Vertices[j + 1]))
+                    if (_lineValidator.Intersect(new Line(p1Vertices[i], p1Vertices[i + 1]),
+                            new Line(p2Vertices[j], p2Vertices[j + 1])))
                     {
                         return true;
                     }

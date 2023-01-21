@@ -5,10 +5,11 @@ namespace ShapesFilter.Algorithms
 {
     public class CircleIntersectsPolygon : IIntersectValidator<Circle, Polygon>
     {
-        private readonly LineIntersectsCircle _lineCircleValidator;
+        private readonly IIntersectValidator<Line, Circle> _lineCircleValidator;
         private readonly IPointInside<Polygon> _pointValidator;
 
-        public CircleIntersectsPolygon(LineIntersectsCircle lineCircleValidator, IPointInside<Polygon> pointValidator)
+        public CircleIntersectsPolygon(IIntersectValidator<Line, Circle> lineCircleValidator,
+            IPointInside<Polygon> pointValidator)
         {
             _lineCircleValidator = lineCircleValidator;
             _pointValidator = pointValidator;
