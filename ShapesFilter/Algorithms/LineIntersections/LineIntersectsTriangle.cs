@@ -1,22 +1,28 @@
-﻿using ShapesFilter.Algorithms.PointInside;
+﻿using System;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsTriangle : IIntersectValidator<Line, Triangle>
+    public class LineIntersectsTriangle : IIntersectValidator
     {
-        private readonly IIntersectValidator<Line, Line> _lineIntersectValidator;
+        private readonly IIntersectValidator _lineIntersectValidator;
         private readonly IPointInside<Triangle> _pointValidator;
 
-        public LineIntersectsTriangle(IIntersectValidator<Line, Line> lineIntersectValidator,
+        public LineIntersectsTriangle(IIntersectValidator lineIntersectValidator,
             IPointInside<Triangle> pointValidator)
         {
             _lineIntersectValidator = lineIntersectValidator;
             _pointValidator = pointValidator;
         }
 
-        public bool Intersect(Line line, Triangle triangle)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Line line) || !(shape2 is Triangle triangle))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             var vertices = triangle.Vertices;
             for (var i = 0; i < vertices.Length; i++)
             {

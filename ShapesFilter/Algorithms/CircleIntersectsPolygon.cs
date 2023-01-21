@@ -1,22 +1,28 @@
-﻿using ShapesFilter.Algorithms.PointInside;
+﻿using System;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class CircleIntersectsPolygon : IIntersectValidator<Circle, Polygon>
+    public class CircleIntersectsPolygon : IIntersectValidator
     {
-        private readonly IIntersectValidator<Line, Circle> _lineCircleValidator;
+        private readonly IIntersectValidator _lineCircleValidator;
         private readonly IPointInside<Polygon> _pointValidator;
 
-        public CircleIntersectsPolygon(IIntersectValidator<Line, Circle> lineCircleValidator,
+        public CircleIntersectsPolygon(IIntersectValidator lineCircleValidator,
             IPointInside<Polygon> pointValidator)
         {
             _lineCircleValidator = lineCircleValidator;
             _pointValidator = pointValidator;
         }
 
-        public bool Intersect(Circle circle, Polygon polygon)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Circle circle) || !(shape2 is Polygon polygon))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             var vertices = polygon.Vertices;
             for (var i = 0; i < vertices.Length; i++)
             {

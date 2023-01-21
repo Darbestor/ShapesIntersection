@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsCircle : IIntersectValidator<Line, Circle>
+    public class LineIntersectsCircle : IIntersectValidator
     {
         private readonly IPointInside<Circle> _pointValidator;
 
@@ -13,8 +13,13 @@ namespace ShapesFilter.Algorithms.LineIntersections
             _pointValidator = pointValidator;
         }
 
-        public bool Intersect(Line line, Circle circle)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Line line) || !(shape2 is Circle circle))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             // is either end INSIDE the circle?
             // if so, return true immediately
             var inside1 = _pointValidator.IsInside(line.P1, circle);

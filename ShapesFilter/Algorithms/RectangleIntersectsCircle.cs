@@ -3,10 +3,15 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class RectangleIntersectsCircle : IIntersectValidator<Rectangle, Circle>
+    public class RectangleIntersectsCircle : IIntersectValidator
     {
-        public bool Intersect(Rectangle rect, Circle circle)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Rectangle rect) || !(shape2 is Circle circle))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             // Find the closest point to the circle within the rectangle
             var closestX = Math.Clamp(circle.Center.X, rect.TopLeft.X, rect.BottomRight.X);
             var closestY = Math.Clamp(circle.Center.Y, rect.TopLeft.Y, rect.BottomRight.Y);

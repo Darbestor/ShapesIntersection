@@ -1,17 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class PolygonIntersectsPolygon : IIntersectValidator<Polygon, Polygon>
+    public class PolygonIntersectsPolygon : IIntersectValidator
     {
-        private readonly IIntersectValidator<BoundingBox, BoundingBox> _aabbValidator;
-        private readonly IIntersectValidator<Line, Line> _lineValidator;
+        private readonly IIntersectValidator _aabbValidator;
+        private readonly IIntersectValidator _lineValidator;
         private readonly IPointInside<Polygon> _pointValidator;
 
-        public PolygonIntersectsPolygon(IIntersectValidator<BoundingBox, BoundingBox> aabbValidator,
-            IIntersectValidator<Line, Line> lineValidator,
+        public PolygonIntersectsPolygon(IIntersectValidator aabbValidator,
+            IIntersectValidator lineValidator,
             IPointInside<Polygon> pointValidator)
         {
             _aabbValidator = aabbValidator;
@@ -19,8 +20,13 @@ namespace ShapesFilter.Algorithms
             _pointValidator = pointValidator;
         }
 
-        public bool Intersect(Polygon polygon1, Polygon polygon2)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Polygon polygon1) || !(shape2 is Polygon polygon2))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             if (!_aabbValidator.Intersect(polygon1.AABB, polygon2.AABB)) return false;
             if (EdgesIntersect(polygon1, polygon2)) return true;
 

@@ -1,11 +1,17 @@
-﻿using ShapesFilter.Shapes;
+﻿using System;
+using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsLine : IIntersectValidator<Line, Line>
+    public class LineIntersectsLine : IIntersectValidator
     {
-        public bool Intersect(Line line1, Line line2)
+        public bool Intersect(IShape shape1, IShape shape2)
         {
+            if (!(shape1 is Line line1) || !(shape2 is Line line2))
+            {
+                throw new ArgumentException("Wrong shapes");
+            }
+
             return Intersect(line1.P1, line1.P2, line2.P1, line2.P2);
         }
 

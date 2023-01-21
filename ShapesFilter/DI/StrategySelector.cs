@@ -5,24 +5,22 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.DI
 {
-    class StrategySelector<S1, S2>
-        where S1 : IShape
-        where S2 : IShape
+    public static class StrategySelector
     {
-        private readonly Dictionary<(ShapeType, ShapeType), IIntersectValidator<S1, S2>> _validators;
+        private static readonly Dictionary<(ShapeType, ShapeType), IIntersectValidator> _validators;
 
-        public StrategySelector()
+        static StrategySelector()
         {
-            _validators = new Dictionary<(ShapeType, ShapeType), IIntersectValidator<S1, S2>>
+            _validators = new Dictionary<(ShapeType, ShapeType), IIntersectValidator>
             {
-                { (ShapeType.Line, ShapeType.Line), (IIntersectValidator<S1, S2>)new LineIntersectsLine() }
+                { (ShapeType.Line, ShapeType.Line), new LineIntersectsLine() }
             };
         }
 
 
-        public IIntersectValidator<S1, S2> GetStrategy(S1 shape1, S2 shape2)
+        public static IIntersectValidator GetStrategy(ShapeType shape1, ShapeType shape2)
         {
-            return _validators.TryGetValue((shape1.ShapeType, shape2.ShapeType), out var v) ? v : null;
+            return _validators.TryGetValue((shape1, shape2), out var v) ? v : null;
         }
     }
 }
