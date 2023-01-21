@@ -1,16 +1,24 @@
 ﻿using System;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
     public class LineIntersectsCircle : IIntersectValidator<Line, Circle>
     {
+        private readonly IPointInside<Circle> _pointValidator;
+
+        public LineIntersectsCircle(IPointInside<Circle> pointValidator)
+        {
+            _pointValidator = pointValidator;
+        }
+
         public bool Intersect(Line line, Circle circle)
         {
             // is either end INSIDE the circle?
             // if so, return true immediately
-            var inside1 = PointInCircle(line.P1, circle);
-            var inside2 = PointInCircle(line.P2, circle);
+            var inside1 = _pointValidator.IsInside(line.P1, circle);
+            var inside2 = _pointValidator.IsInside(line.P1, circle);
             if (inside1 || inside2) return true;
 
             var v1X = line.P2.X - line.P1.X;
@@ -27,19 +35,6 @@ namespace ShapesFilter.Algorithms
             var u1 = (b - d) / c; // these represent the unit distance of point one and two on the line
             var u2 = (b + d) / c;
             return (u1 <= 1 && u1 >= 0) || (u2 <= 1 && u2 >= 0); // if point on the line segment
-        }
-
-        private bool PointInCircle(PointF p, Circle c)
-        {
-            // get distance between the point and circle's center
-            // using the Pythagorean Theorem
-            float distX = p.X - c.Center.X;
-            float distY = p.Y - c.Center.Y;
-            float distance = MathF.Sqrt((distX * distX) + (distY * distY));
-
-            // if the distance is less than the circle's 
-            // radius the point is inside!
-            return distance <= c.Radius;
         }
     }
 }

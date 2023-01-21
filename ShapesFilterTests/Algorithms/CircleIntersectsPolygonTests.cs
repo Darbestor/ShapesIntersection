@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ShapesFilter.Algorithms;
+using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
@@ -24,7 +25,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle());
+            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
 
             Assert.True(alg.Intersect(circle, polygon));
         }
@@ -43,7 +44,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle());
+            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
 
             Assert.True(alg.Intersect(circle, polygon));
         }
@@ -62,7 +63,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotIntersect(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle());
+            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
 
             Assert.False(alg.Intersect(circle, polygon));
         }
