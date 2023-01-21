@@ -28,16 +28,20 @@ namespace ShapesFilter
             for (var i = shapes.Count - 2; i >= 0; i--)
             {
                 var target = new FilteredShape { Shape = shapes[i] };
-                if (target.Shape.Area > threshold)
+                if (target.Shape.Area < threshold)
                 {
-                    foreach (var source in passed)
+                    target.Foreground = false;
+                    passed.Add(target);
+                    continue;
+                }
+
+                foreach (var source in passed)
+                {
+                    var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.Shape.ShapeType);
+                    if (strategy.Intersect(target.Shape, source.Shape))
                     {
-                        var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.Shape.ShapeType);
-                        if (strategy.Intersect(target.Shape, source.Shape))
-                        {
-                            target.Foreground = false;
-                            break;
-                        }
+                        target.Foreground = false;
+                        break;
                     }
                 }
 
