@@ -2,7 +2,7 @@
 
 namespace ShapesFilter.Algorithms
 {
-    public class LineIntersectsLine: IIntersectValidator<Line, Line>
+    public class LineIntersectsLine : IIntersectValidator<Line, Line>
     {
         public bool Intersect(Line line1, Line line2)
         {
