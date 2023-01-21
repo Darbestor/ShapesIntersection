@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using ShapesFilter.Shapes;
+﻿using System;
+using System.Collections.Generic;
 
-namespace ShapesFilter
+namespace ShapesFilter.Shapes
 {
     public class BoundingBox : IShape
     {
@@ -9,6 +9,7 @@ namespace ShapesFilter
         {
             TopLeft = topLeft;
             BottomRight = bottomRight;
+            Area = MathF.Abs(bottomRight.X - TopLeft.X) * MathF.Abs(TopLeft.Y - bottomRight.Y);
         }
 
         internal BoundingBox(float minX, float minY, float maxX, float maxY) : this(new PointF(minX, minY),
@@ -40,5 +41,6 @@ namespace ShapesFilter
 
         public PointF TopLeft { get; }
         public PointF BottomRight { get; }
+        public float Area { get; }
     }
 }

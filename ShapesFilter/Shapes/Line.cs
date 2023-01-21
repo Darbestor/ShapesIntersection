@@ -8,6 +8,7 @@ namespace ShapesFilter.Shapes
         {
             P1 = p1;
             P2 = p2;
+            Area = 0;
         }
 
 
@@ -17,6 +18,8 @@ namespace ShapesFilter.Shapes
 
         public PointF P1 { get; }
         public PointF P2 { get; }
+
+        public float Area { get; }
 
         public override bool Equals(object obj)
         {

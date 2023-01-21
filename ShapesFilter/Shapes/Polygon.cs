@@ -1,11 +1,10 @@
 ﻿namespace ShapesFilter.Shapes
 {
-    public class Polygon : IShape
+    public abstract class Polygon : IShape
     {
-        public Polygon(PointF[] vertices, BoundingBox aabb)
+        protected Polygon(PointF[] vertices)
         {
             Vertices = vertices;
-            AABB = aabb;
         }
 
         public PointF[] Vertices { get; }
@@ -13,6 +12,8 @@
         /// <summary>
         ///     Axis-aligned bounding box
         /// </summary>
-        public BoundingBox AABB { get; }
+        public abstract BoundingBox AABB { get; }
+
+        public abstract float Area { get; }
     }
 }

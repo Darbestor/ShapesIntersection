@@ -10,9 +10,11 @@ namespace ShapesFilter.Shapes
 
             Center = center;
             Radius = radius;
+            Area = MathF.PI * MathF.Pow(radius, 2);
         }
 
         public PointF Center { get; }
         public float Radius { get; }
+        public float Area { get; }
     }
 }

@@ -9,7 +9,6 @@ namespace ShapesFilter.Algorithms.PointInside
             var v1 = shape.Vertices[0];
             var v2 = shape.Vertices[1];
             var v3 = shape.Vertices[2];
-
             var s = (v1.X - v3.X) * (target.Y - v3.Y) - (v1.Y - v3.Y) * (target.X - v3.X);
             var t = (v2.X - v1.X) * (target.Y - v1.Y) - (v2.Y - v1.Y) * (target.X - v1.X);
 

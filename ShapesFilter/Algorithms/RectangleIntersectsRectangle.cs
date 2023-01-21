@@ -1,4 +1,6 @@
-﻿namespace ShapesFilter.Algorithms
+﻿using ShapesFilter.Shapes;
+
+namespace ShapesFilter.Algorithms
 {
     public class RectangleIntersectsRectangle : IIntersectValidator<BoundingBox, BoundingBox>
     {
