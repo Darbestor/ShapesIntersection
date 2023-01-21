@@ -16,8 +16,8 @@ namespace ShapesFilter.Algorithms
             var distanceY = circle.Center.Y - closestY;
 
             // If the distance is less than the circle's radius, an intersection occurs
-            var distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
-            return distanceSquared < (circle.Radius * circle.Radius);
+            var distanceSquared = distanceX * distanceX + distanceY * distanceY;
+            return distanceSquared < circle.Radius * circle.Radius;
         }
     }
 }

@@ -21,10 +21,7 @@ namespace ShapesFilter.Shapes
         public override bool Equals(object obj)
         {
             var other = obj as Line;
-            if (other == null)
-            {
-                return false;
-            }
+            if (other == null) return false;
 
             return P1.Equals(other.P1) && P2.Equals(other.P2);
         }

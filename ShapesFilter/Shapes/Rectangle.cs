@@ -2,12 +2,9 @@
 {
     public class Rectangle : Polygon
     {
-        public PointF TopLeft { get; }
-        public PointF BottomRight { get; }
-        public PointF BottomLeft { get; }
-        public PointF TopRight { get; }
-
-        public Rectangle(PointF topLeft, PointF bottomRight): base(new []{topLeft, new PointF(bottomRight.X, topLeft.Y), bottomRight, new PointF(topLeft.X, bottomRight.Y)}, new BoundingBox(topLeft, bottomRight))
+        public Rectangle(PointF topLeft, PointF bottomRight) : base(
+            new[] { topLeft, new PointF(bottomRight.X, topLeft.Y), bottomRight, new PointF(topLeft.X, bottomRight.Y) },
+            new BoundingBox(topLeft, bottomRight))
         {
             TopLeft = Vertices[0];
             TopRight = Vertices[1];
@@ -24,5 +21,9 @@
         {
         }
 
+        public PointF TopLeft { get; }
+        public PointF BottomRight { get; }
+        public PointF BottomLeft { get; }
+        public PointF TopRight { get; }
     }
 }

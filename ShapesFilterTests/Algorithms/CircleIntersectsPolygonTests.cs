@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ShapesFilter.Algorithms;
+using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using ShapesFilter.Shapes;
 
-namespace ShapesFilter.Algorithms
+namespace ShapesFilter.Algorithms.LineIntersections
 {
     public class LineIntersectsRectangle : IIntersectValidator<Line, Rectangle>
     {
@@ -18,20 +18,12 @@ namespace ShapesFilter.Algorithms
             }
 
             // Find the intersection of the segment's and rectangle's x-projections
-            if (maxX > rectangle.BottomRight.X)
-            {
-                maxX = rectangle.BottomRight.X;
-            }
+            if (maxX > rectangle.BottomRight.X) maxX = rectangle.BottomRight.X;
 
-            if (minX < rectangle.TopLeft.X)
-            {
-                minX = rectangle.TopLeft.X;
-            }
+            if (minX < rectangle.TopLeft.X) minX = rectangle.TopLeft.X;
 
             if (minX > maxX) // If their projections do not intersect return false
-            {
                 return false;
-            }
 
             // Find corresponding min and max Y for min and max X we found before
             double minY = line.P1.Y;
@@ -41,32 +33,21 @@ namespace ShapesFilter.Algorithms
 
             if (Math.Abs(dx) > 0.0000001)
             {
-                double a = (line.P2.Y - line.P1.Y) / dx;
-                double b = line.P1.Y - a * line.P1.X;
+                var a = (line.P2.Y - line.P1.Y) / dx;
+                var b = line.P1.Y - a * line.P1.X;
                 minY = a * minX + b;
                 maxY = a * maxX + b;
             }
 
-            if (minY > maxY)
-            {
-                (maxY, minY) = (minY, maxY);
-            }
+            if (minY > maxY) (maxY, minY) = (minY, maxY);
 
             // Find the intersection of the segment's and rectangle's y-projections
-            if (maxY > rectangle.BottomRight.Y)
-            {
-                maxY = rectangle.BottomRight.Y;
-            }
+            if (maxY > rectangle.BottomRight.Y) maxY = rectangle.BottomRight.Y;
 
-            if (minY < rectangle.TopLeft.Y)
-            {
-                minY = rectangle.TopLeft.Y;
-            }
+            if (minY < rectangle.TopLeft.Y) minY = rectangle.TopLeft.Y;
 
             if (minY > maxY) // If Y-projections do not intersect return false
-            {
                 return false;
-            }
 
             return true;
         }

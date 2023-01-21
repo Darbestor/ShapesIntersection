@@ -2,20 +2,17 @@
 
 namespace ShapesFilter.Shapes
 {
-    public class Circle: IShape
+    public class Circle : IShape
     {
-        public PointF Center { get; }
-        public float Radius { get; }
-
         public Circle(PointF center, float radius)
         {
-            if (radius < 0)
-            {
-                throw new ArgumentException("Radius must be > 0");
-            }
+            if (radius < 0) throw new ArgumentException("Radius must be > 0");
 
             Center = center;
             Radius = radius;
         }
+
+        public PointF Center { get; }
+        public float Radius { get; }
     }
 }

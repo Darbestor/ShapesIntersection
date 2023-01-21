@@ -2,31 +2,16 @@
 
 namespace ShapesFilter.Shapes
 {
-    public class PointF: IComparable<PointF>
+    public class PointF : IComparable<PointF>
     {
-        public float X { get;}
-        public float Y { get;}
-
         public PointF(float x, float y)
         {
             X = x;
             Y = y;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is PointF other)
-            {
-                return X.Equals(other.X) && Y.Equals(other.Y);
-            }
-            
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() + Y.GetHashCode();
-        }
+        public float X { get; }
+        public float Y { get; }
 
         public int CompareTo(PointF other)
         {
@@ -35,6 +20,18 @@ namespace ShapesFilter.Shapes
             var xComparison = X.CompareTo(other.X);
             if (xComparison != 0) return xComparison;
             return Y.CompareTo(other.Y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is PointF other) return X.Equals(other.X) && Y.Equals(other.Y);
+
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() + Y.GetHashCode();
         }
     }
 }

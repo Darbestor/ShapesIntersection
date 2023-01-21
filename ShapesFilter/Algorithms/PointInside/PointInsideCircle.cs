@@ -9,9 +9,9 @@ namespace ShapesFilter.Algorithms.PointInside
         {
             // get distance between the point and circle's center
             // using the Pythagorean Theorem
-            float distX = target.X - shape.Center.X;
-            float distY = target.Y - shape.Center.Y;
-            float distance = MathF.Sqrt((distX * distX) + (distY * distY));
+            var distX = target.X - shape.Center.X;
+            var distY = target.Y - shape.Center.Y;
+            var distance = MathF.Sqrt(distX * distX + distY * distY);
 
             // if the distance is less than the circle's 
             // radius the point is inside!

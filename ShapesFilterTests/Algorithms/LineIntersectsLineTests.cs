@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using ShapesFilter.Algorithms;
+using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
@@ -15,7 +15,7 @@ namespace ShapesFilterTests.Algorithms
             var alg = new LineIntersectsLine();
             Assert.False(alg.Intersect(l1, l2));
         }
-        
+
         [Test]
         public void TestIntersect()
         {

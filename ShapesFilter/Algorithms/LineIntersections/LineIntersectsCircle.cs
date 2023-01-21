@@ -2,7 +2,7 @@
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
-namespace ShapesFilter.Algorithms
+namespace ShapesFilter.Algorithms.LineIntersections
 {
     public class LineIntersectsCircle : IIntersectValidator<Line, Circle>
     {
@@ -25,7 +25,7 @@ namespace ShapesFilter.Algorithms
             var v1Y = line.P2.Y - line.P1.Y;
             var v2X = line.P1.X - circle.Center.X;
             var v2Y = line.P1.Y - circle.Center.Y;
-            var b = (v1X * v2X + v1Y * v2Y);
+            var b = v1X * v2X + v1Y * v2Y;
             var c = 2 * (v1X * v1X + v1Y * v1Y);
             b *= -2;
             var d = Math.Sqrt(b * b - 2 * c * (v2X * v2X + v2Y * v2Y - circle.Radius * circle.Radius));
