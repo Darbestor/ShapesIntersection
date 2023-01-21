@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
@@ -6,10 +6,12 @@ namespace ShapesFilter.Algorithms
     public class CircleIntersectsPolygon : IIntersectValidator<Circle, Polygon>
     {
         private readonly LineIntersectsCircle _lineCircleValidator;
+        private readonly IPointInside<Polygon> _pointValidator;
 
-        public CircleIntersectsPolygon(LineIntersectsCircle lineCircleValidator)
+        public CircleIntersectsPolygon(LineIntersectsCircle lineCircleValidator, IPointInside<Polygon> pointValidator)
         {
             _lineCircleValidator = lineCircleValidator;
+            _pointValidator = pointValidator;
         }
 
         public bool Intersect(Circle circle, Polygon polygon)
@@ -24,30 +26,7 @@ namespace ShapesFilter.Algorithms
                 }
             }
 
-            return IsInside(vertices, circle.Center);
-        }
-
-        //TODO Refactor
-        private bool IsInside(IReadOnlyList<PointF> polygon, PointF point)
-        {
-            bool result = false;
-            int j = polygon.Count - 1;
-            for (int i = 0; i < polygon.Count; i++)
-            {
-                if (polygon[i].Y < point.Y && polygon[j].Y >= point.Y ||
-                    polygon[j].Y < point.Y && polygon[i].Y >= point.Y)
-                {
-                    if (polygon[i].X + (point.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) *
-                        (polygon[j].X - polygon[i].X) < point.X)
-                    {
-                        result = !result;
-                    }
-                }
-
-                j = i;
-            }
-
-            return result;
+            return _pointValidator.IsInside(circle.Center, polygon);
         }
     }
 }

@@ -6,8 +6,18 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class CircleIntersectsPolygonTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()),
+                new PointInsidePolygon());
+        }
+
+        private CircleIntersectsPolygon _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(
@@ -25,9 +35,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
-
-            Assert.True(alg.Intersect(circle, polygon));
+            Assert.That(_algorithm.Intersect(circle, polygon), Is.True);
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -44,9 +52,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
-
-            Assert.True(alg.Intersect(circle, polygon));
+            Assert.That(_algorithm.Intersect(circle, polygon), Is.True);
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -63,9 +69,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotIntersect(Polygon polygon, Circle circle)
         {
-            var alg = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()));
-
-            Assert.False(alg.Intersect(circle, polygon));
+            Assert.That(_algorithm.Intersect(circle, polygon), Is.False);
         }
     }
 }
