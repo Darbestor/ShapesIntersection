@@ -20,6 +20,8 @@ namespace ShapesFilter.Shapes
         public PointF P2 { get; }
 
         public float Area { get; }
+        public ShapeType ShapeType => ShapeType.Line;
+
 
         public override bool Equals(object obj)
         {

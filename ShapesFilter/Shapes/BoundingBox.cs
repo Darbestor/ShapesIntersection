@@ -42,5 +42,6 @@ namespace ShapesFilter.Shapes
         public PointF TopLeft { get; }
         public PointF BottomRight { get; }
         public float Area { get; }
+        public ShapeType ShapeType => ShapeType.Rectangle;
     }
 }

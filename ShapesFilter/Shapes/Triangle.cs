@@ -19,6 +19,7 @@ namespace ShapesFilter.Shapes
 
         public override BoundingBox AABB { get; }
         public override float Area { get; }
+        public override ShapeType ShapeType => ShapeType.Triangle;
 
         private float GetArea()
         {

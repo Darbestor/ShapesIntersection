@@ -3,5 +3,6 @@
     public interface IShape
     {
         float Area { get; }
+        ShapeType ShapeType { get; }
     }
 }

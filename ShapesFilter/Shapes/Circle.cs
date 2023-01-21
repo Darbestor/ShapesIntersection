@@ -16,5 +16,6 @@ namespace ShapesFilter.Shapes
         public PointF Center { get; }
         public float Radius { get; }
         public float Area { get; }
+        public ShapeType ShapeType => ShapeType.Circle;
     }
 }

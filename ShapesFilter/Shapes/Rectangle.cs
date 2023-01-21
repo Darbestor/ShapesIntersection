@@ -30,5 +30,6 @@ namespace ShapesFilter.Shapes
         public PointF TopRight { get; }
         public override BoundingBox AABB { get; }
         public override float Area { get; }
+        public override ShapeType ShapeType => ShapeType.Rectangle;
     }
 }
