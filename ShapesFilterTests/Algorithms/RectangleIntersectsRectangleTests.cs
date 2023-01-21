@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ShapesFilter;
-using ShapesFilter.Algorithm;
 using ShapesFilter.Algorithms;
 using ShapesFilter.Shapes;
 

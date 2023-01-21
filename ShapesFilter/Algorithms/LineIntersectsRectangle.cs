@@ -1,5 +1,4 @@
 ﻿using System;
-using ShapesFilter.Algorithm;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms

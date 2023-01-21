@@ -1,6 +1,6 @@
 ﻿using ShapesFilter.Shapes;
 
-namespace ShapesFilter.Algorithm
+namespace ShapesFilter.Algorithms
 {
     public interface IIntersectValidator<S1, S2>
         where S1 : IShape

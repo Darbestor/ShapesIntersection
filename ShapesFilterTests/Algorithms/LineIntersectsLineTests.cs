@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using ShapesFilter.Algorithm;
 using ShapesFilter.Algorithms;
 using ShapesFilter.Shapes;
 
