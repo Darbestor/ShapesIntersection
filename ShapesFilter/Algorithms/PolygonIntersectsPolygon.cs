@@ -27,10 +27,9 @@ namespace ShapesFilter.Algorithms
                     return true;
                 }
 
-                if (PointInside(polygon1, polygon2))
-                {
-                    return true;
-                }
+                return polygon1.Vertices.Any(v => _pointValidator.IsInside(v, polygon2)) ||
+                       polygon2.Vertices.Any(v => _pointValidator.IsInside(v, polygon1));
+                ;
             }
 
             return false;
@@ -52,12 +51,6 @@ namespace ShapesFilter.Algorithms
             }
 
             return false;
-        }
-
-        private bool PointInside(Polygon p1, Polygon p2)
-        {
-            return p1.Vertices.Any(v => _pointValidator.IsInside(v, p2)) ||
-                   p2.Vertices.Any(v => _pointValidator.IsInside(v, p1));
         }
     }
 }
