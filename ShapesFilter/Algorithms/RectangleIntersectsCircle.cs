@@ -7,22 +7,19 @@ namespace ShapesFilter.Algorithms
     {
         public bool Intersect(IShape shape1, IShape shape2)
         {
-            if (!(shape1 is Rectangle rect) || !(shape2 is Circle circle))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            var shapes = new ShapeCaster<Circle, Rectangle>(shape1, shape2);
 
             // Find the closest point to the circle within the rectangle
-            var closestX = Math.Clamp(circle.Center.X, rect.TopLeft.X, rect.BottomRight.X);
-            var closestY = Math.Clamp(circle.Center.Y, rect.TopLeft.Y, rect.BottomRight.Y);
+            var closestX = Math.Clamp(shapes.Shape1.Center.X, shapes.Shape2.TopLeft.X, shapes.Shape2.BottomRight.X);
+            var closestY = Math.Clamp(shapes.Shape1.Center.Y, shapes.Shape2.TopLeft.Y, shapes.Shape2.BottomRight.Y);
 
             // Calculate the distance between the circle's center and this closest point
-            var distanceX = circle.Center.X - closestX;
-            var distanceY = circle.Center.Y - closestY;
+            var distanceX = shapes.Shape1.Center.X - closestX;
+            var distanceY = shapes.Shape1.Center.Y - closestY;
 
             // If the distance is less than the circle's radius, an intersection occurs
             var distanceSquared = distanceX * distanceX + distanceY * distanceY;
-            return distanceSquared < circle.Radius * circle.Radius;
+            return distanceSquared < shapes.Shape1.Radius * shapes.Shape1.Radius;
         }
     }
 }

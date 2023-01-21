@@ -1,5 +1,4 @@
-﻿using System;
-using ShapesFilter.Algorithms.PointInside;
+﻿using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
@@ -18,19 +17,17 @@ namespace ShapesFilter.Algorithms.LineIntersections
 
         public bool Intersect(IShape shape1, IShape shape2)
         {
-            if (!(shape1 is Line line) || !(shape2 is Triangle triangle))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            var shapes = new ShapeCaster<Line, Triangle>(shape1, shape2);
 
-            var vertices = triangle.Vertices;
+            var vertices = shapes.Shape2.Vertices;
             for (var i = 0; i < vertices.Length; i++)
             {
                 var nextVertex = (i + 1) % 3;
-                if (_lineIntersectValidator.Intersect(line, new Line(vertices[i], vertices[nextVertex]))) return true;
+                if (_lineIntersectValidator.Intersect(shapes.Shape1, new Line(vertices[i], vertices[nextVertex])))
+                    return true;
             }
 
-            return _pointValidator.IsInside(line.P1, triangle);
+            return _pointValidator.IsInside(shapes.Shape1.P1, shapes.Shape2);
         }
     }
 }

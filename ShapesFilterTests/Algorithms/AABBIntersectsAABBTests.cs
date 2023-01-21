@@ -5,7 +5,7 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
-    public class RectangleIntersectsRectangleTests
+    public class AABBIntersectsAABBTests
     {
         private static IEnumerable<TestCaseData> IntersectCases()
         {
@@ -36,7 +36,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Rectangle r1, Rectangle r2)
         {
-            var alg = new RectangleIntersectsRectangle();
+            var alg = new AABBIntersectsAABB();
 
             Assert.True(alg.Intersect(r1.AABB, r2.AABB));
         }
@@ -55,7 +55,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Rectangle r1, Rectangle r2)
         {
-            var alg = new RectangleIntersectsRectangle();
+            var alg = new AABBIntersectsAABB();
 
             Assert.True(alg.Intersect(r1.AABB, r2.AABB));
         }
@@ -83,7 +83,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestDoNotIntersect(Rectangle r1, Rectangle r2)
         {
-            var alg = new RectangleIntersectsRectangle();
+            var alg = new AABBIntersectsAABB();
 
             Assert.True(alg.Intersect(r1.AABB, r2.AABB));
         }

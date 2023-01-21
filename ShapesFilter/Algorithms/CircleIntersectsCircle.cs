@@ -7,13 +7,11 @@ namespace ShapesFilter.Algorithms
     {
         public bool Intersect(IShape shape1, IShape shape2)
         {
-            if (!(shape1 is Circle circle2) || !(shape2 is Circle circle1))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            var shapes = new ShapeCaster<Circle, Circle>(shape1, shape2);
 
-            return Math.Sqrt(Math.Pow(circle1.Center.X - circle2.Center.X, 2) +
-                             Math.Pow(circle1.Center.Y - circle2.Center.Y, 2)) < circle1.Radius + circle2.Radius;
+            return Math.Sqrt(Math.Pow(shapes.Shape1.Center.X - shapes.Shape2.Center.X, 2) +
+                             Math.Pow(shapes.Shape1.Center.Y - shapes.Shape2.Center.Y, 2)) <
+                   shapes.Shape1.Radius + shapes.Shape2.Radius;
         }
     }
 }

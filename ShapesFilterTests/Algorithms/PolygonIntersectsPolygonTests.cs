@@ -13,7 +13,7 @@ namespace ShapesFilterTests.Algorithms
         [SetUp]
         public void Setup()
         {
-            _algorithm = new PolygonIntersectsPolygon(new RectangleIntersectsRectangle(), new LineIntersectsLine(),
+            _algorithm = new PolygonIntersectsPolygon(new AABBIntersectsAABB(), new LineIntersectsLine(),
                 new PointInsidePolygon());
         }
 

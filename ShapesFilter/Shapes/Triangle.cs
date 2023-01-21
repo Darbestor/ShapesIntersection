@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ShapesFilter.Shapes
 {
@@ -11,10 +9,6 @@ namespace ShapesFilter.Shapes
             if (vertices.Length != 3) throw new ArgumentException("Triangle must have 3 vertices");
             AABB = new BoundingBox(vertices);
             Area = GetArea();
-        }
-
-        public Triangle(IEnumerable<PointF> boundaries) : this(boundaries.ToArray())
-        {
         }
 
         public override BoundingBox AABB { get; }

@@ -8,13 +8,13 @@ namespace ShapesFilter
     public class FilteredShape
     {
         public IShape Shape { get; set; }
-        public bool Foreground { get; set; }
+        public bool Foreground { get; set; } = true;
     }
 
     public class Filter
     {
         // Проверять только элементы которые в данный момент на переднем плане
-        public List<FilteredShape> FilterForegroundShapes(List<IShape> shapes)
+        public List<FilteredShape> FilterForegroundShapes(List<IShape> shapes, float threshold)
         {
             if (shapes == null || shapes.Count == 0)
             {
@@ -28,18 +28,23 @@ namespace ShapesFilter
             for (var i = shapes.Count - 2; i >= 0; i--)
             {
                 var target = new FilteredShape { Shape = shapes[i] };
-                for (var j = i + 1; j < shapes.Count - 1; j++)
+                if (target.Shape.Area > threshold)
                 {
-                    var source = shapes[j];
-                    var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.ShapeType);
-                    if (strategy.Intersect(target.Shape, source))
+                    foreach (var source in passed)
                     {
-                        target.Foreground = true;
-                        break;
+                        var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.Shape.ShapeType);
+                        if (strategy.Intersect(target.Shape, source.Shape))
+                        {
+                            target.Foreground = false;
+                            break;
+                        }
                     }
                 }
+
+                passed.Add(target);
             }
 
+            passed.Reverse();
             return passed;
         }
     }

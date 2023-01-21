@@ -7,39 +7,36 @@ namespace ShapesFilter.Algorithms.LineIntersections
     {
         public bool Intersect(IShape shape1, IShape shape2)
         {
-            if (!(shape1 is Line line) || !(shape2 is Rectangle rectangle))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            var shapes = new ShapeCaster<Line, Rectangle>(shape1, shape2);
 
             // Find min and max X for the segment
-            double minX = line.P1.X;
-            double maxX = line.P2.X;
+            double minX = shapes.Shape1.P1.X;
+            double maxX = shapes.Shape1.P2.X;
 
-            if (line.P1.X > line.P2.X)
+            if (shapes.Shape1.P1.X > shapes.Shape1.P2.X)
             {
-                minX = line.P2.X;
-                maxX = line.P1.X;
+                minX = shapes.Shape1.P2.X;
+                maxX = shapes.Shape1.P1.X;
             }
 
             // Find the intersection of the segment's and rectangle's x-projections
-            if (maxX > rectangle.BottomRight.X) maxX = rectangle.BottomRight.X;
+            if (maxX > shapes.Shape2.BottomRight.X) maxX = shapes.Shape2.BottomRight.X;
 
-            if (minX < rectangle.TopLeft.X) minX = rectangle.TopLeft.X;
+            if (minX < shapes.Shape2.TopLeft.X) minX = shapes.Shape2.TopLeft.X;
 
             if (minX > maxX) // If their projections do not intersect return false
                 return false;
 
             // Find corresponding min and max Y for min and max X we found before
-            double minY = line.P1.Y;
-            double maxY = line.P2.Y;
+            double minY = shapes.Shape1.P1.Y;
+            double maxY = shapes.Shape1.P2.Y;
 
-            double dx = line.P2.X - line.P1.X;
+            double dx = shapes.Shape1.P2.X - shapes.Shape1.P1.X;
 
             if (Math.Abs(dx) > 0.0000001)
             {
-                var a = (line.P2.Y - line.P1.Y) / dx;
-                var b = line.P1.Y - a * line.P1.X;
+                var a = (shapes.Shape1.P2.Y - shapes.Shape1.P1.Y) / dx;
+                var b = shapes.Shape1.P1.Y - a * shapes.Shape1.P1.X;
                 minY = a * minX + b;
                 maxY = a * maxX + b;
             }
@@ -47,9 +44,9 @@ namespace ShapesFilter.Algorithms.LineIntersections
             if (minY > maxY) (maxY, minY) = (minY, maxY);
 
             // Find the intersection of the segment's and rectangle's y-projections
-            if (maxY > rectangle.BottomRight.Y) maxY = rectangle.BottomRight.Y;
+            if (maxY > shapes.Shape2.BottomRight.Y) maxY = shapes.Shape2.BottomRight.Y;
 
-            if (minY < rectangle.TopLeft.Y) minY = rectangle.TopLeft.Y;
+            if (minY < shapes.Shape2.TopLeft.Y) minY = shapes.Shape2.TopLeft.Y;
 
             if (minY > maxY) // If Y-projections do not intersect return false
                 return false;

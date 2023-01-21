@@ -15,25 +15,22 @@ namespace ShapesFilter.Algorithms.LineIntersections
 
         public bool Intersect(IShape shape1, IShape shape2)
         {
-            if (!(shape1 is Line line) || !(shape2 is Circle circle))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            var shapes = new ShapeCaster<Line, Circle>(shape1, shape2);
 
             // is either end INSIDE the circle?
             // if so, return true immediately
-            var inside1 = _pointValidator.IsInside(line.P1, circle);
-            var inside2 = _pointValidator.IsInside(line.P1, circle);
+            var inside1 = _pointValidator.IsInside(shapes.Shape1.P1, shapes.Shape2);
+            var inside2 = _pointValidator.IsInside(shapes.Shape1.P1, shapes.Shape2);
             if (inside1 || inside2) return true;
 
-            var v1X = line.P2.X - line.P1.X;
-            var v1Y = line.P2.Y - line.P1.Y;
-            var v2X = line.P1.X - circle.Center.X;
-            var v2Y = line.P1.Y - circle.Center.Y;
+            var v1X = shapes.Shape1.P2.X - shapes.Shape1.P1.X;
+            var v1Y = shapes.Shape1.P2.Y - shapes.Shape1.P1.Y;
+            var v2X = shapes.Shape1.P1.X - shapes.Shape2.Center.X;
+            var v2Y = shapes.Shape1.P1.Y - shapes.Shape2.Center.Y;
             var b = v1X * v2X + v1Y * v2Y;
             var c = 2 * (v1X * v1X + v1Y * v1Y);
             b *= -2;
-            var d = Math.Sqrt(b * b - 2 * c * (v2X * v2X + v2Y * v2Y - circle.Radius * circle.Radius));
+            var d = Math.Sqrt(b * b - 2 * c * (v2X * v2X + v2Y * v2Y - shapes.Shape2.Radius * shapes.Shape2.Radius));
 
             if (!(d > 0)) return false;
 
