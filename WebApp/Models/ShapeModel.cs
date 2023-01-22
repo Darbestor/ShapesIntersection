@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Server.Models;
+namespace WebApp.Models;
 
 [JsonDerivedType(typeof(LineModel), 1)]
 [JsonDerivedType(typeof(CircleModel), 2)]

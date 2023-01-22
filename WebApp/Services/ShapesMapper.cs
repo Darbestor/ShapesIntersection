@@ -1,7 +1,7 @@
-﻿using Server.Models;
-using ShapesFilter.Shapes;
+﻿using ShapesFilter.Shapes;
+using WebApp.Models;
 
-namespace Server.Services;
+namespace WebApp.Services;
 
 public class ShapesMapper
 {

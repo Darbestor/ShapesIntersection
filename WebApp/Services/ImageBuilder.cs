@@ -3,7 +3,7 @@ using ShapesFilter.Shapes;
 using Svg;
 using Rectangle = ShapesFilter.Shapes.Rectangle;
 
-namespace Server.Services;
+namespace WebApp.Services;
 
 public class ImageBuilder
 {

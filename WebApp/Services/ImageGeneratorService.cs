@@ -1,7 +1,7 @@
 ﻿using ShapesFilter;
 using ShapesFilter.Shapes;
 
-namespace Server.Services;
+namespace WebApp.Services;
 
 public class ImageGeneratorService
 {

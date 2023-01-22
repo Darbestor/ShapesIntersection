@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Server.Models;
+using WebApp.Models;
 
-namespace Server.Services;
+namespace WebApp.Services;
 
 public class ShapesSessionRepository
 {

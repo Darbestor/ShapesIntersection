@@ -1,4 +1,4 @@
-﻿namespace Server.Models;
+﻿namespace WebApp.Models;
 
 public class RectangleModel : ShapeModel
 {

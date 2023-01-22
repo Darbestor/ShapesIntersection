@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Server.Models;
-using Server.Services;
 using ShapesFilter;
 using ShapesFilter.AlgorithmSelection;
+using WebApp.Models;
+using WebApp.Services;
 
-namespace Server.Pages;
+namespace WebApp.Pages;
 
 public class IndexModel : PageModel
 {
-    private const int ImageWidth = 700;
-    private const int ImageHeight = 700;
+    private const int ImageWidth = 1000;
+    private const int ImageHeight = 1000;
     private const float ForegroundAreaThreshold = 10;
 
     private static List<ShapeModel> _testModels = new()
