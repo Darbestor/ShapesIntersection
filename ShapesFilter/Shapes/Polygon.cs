@@ -1,5 +1,8 @@
 ﻿namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// Polygon
+    /// </summary>
     public abstract class Polygon : IShape
     {
         protected Polygon(PointF[] vertices)
@@ -10,7 +13,7 @@
         public PointF[] Vertices { get; }
 
         /// <summary>
-        ///     Axis-aligned bounding box
+        /// <inheritdoc cref="BoundingBox"/>
         /// </summary>
         public abstract BoundingBox AABB { get; }
 

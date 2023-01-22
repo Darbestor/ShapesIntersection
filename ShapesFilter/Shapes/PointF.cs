@@ -2,6 +2,9 @@
 
 namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// 2D point
+    /// </summary>
     public class PointF : IComparable<PointF>
     {
         public PointF(float x, float y)

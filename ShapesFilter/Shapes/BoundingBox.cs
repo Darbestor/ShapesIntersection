@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// Axis-aligned bounding box
+    /// </summary>
     public class BoundingBox : IShape
     {
         internal BoundingBox(PointF topLeft, PointF bottomRight)

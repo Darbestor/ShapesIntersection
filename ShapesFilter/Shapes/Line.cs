@@ -2,6 +2,9 @@
 
 namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// Line
+    /// </summary>
     public class Line : IShape
     {
         public Line(PointF p1, PointF p2)

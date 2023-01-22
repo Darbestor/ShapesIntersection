@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ShapesFilter.DI;
 using ShapesFilter.Shapes;
@@ -11,14 +12,25 @@ namespace ShapesFilter
         public bool Foreground { get; set; } = true;
     }
 
+    /// <summary>
+    /// Filter foreground shapes
+    /// </summary>
     public class Filter
     {
-        // Проверять только элементы которые в данный момент на переднем плане
+        /// <summary>
+        /// Process all the shapes and mark foreground shapes
+        /// </summary>
+        /// <param name="shapes"></param>
+        /// <param name="threshold">Minimal area for foreground shape </param>
+        /// <returns>Shapes with foreground flags</returns>
+        /// <exception cref="ArgumentOutOfRangeException">threshold &lt; 0</exception>
         public List<FilteredShape> FilterForegroundShapes(List<IShape> shapes, float threshold)
         {
-            if (shapes == null || shapes.Count == 0)
+            if (shapes == null) throw new ArgumentNullException(nameof(shapes));
+            if (threshold < 0) throw new ArgumentOutOfRangeException(nameof(threshold));
+            if (shapes.Count == 0)
             {
-                return null;
+                return new List<FilteredShape>();
             }
 
             var passed = new List<FilteredShape>

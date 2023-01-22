@@ -2,8 +2,16 @@
 
 namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// Triangle
+    /// </summary>
     public class Triangle : Polygon
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="vertices">points. Points must be equal to 3</param>
+        /// <exception cref="ArgumentException">number of point if not 3</exception>
         public Triangle(params PointF[] vertices) : base(vertices)
         {
             if (vertices.Length != 3) throw new ArgumentException("Triangle must have 3 vertices");

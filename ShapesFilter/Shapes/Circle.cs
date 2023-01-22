@@ -2,6 +2,9 @@
 
 namespace ShapesFilter.Shapes
 {
+    /// <summary>
+    /// Circle
+    /// </summary>
     public class Circle : IShape
     {
         public Circle(PointF center, float radius)
