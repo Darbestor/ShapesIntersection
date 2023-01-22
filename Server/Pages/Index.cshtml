@@ -7,88 +7,95 @@
 <div class="text-center">
     <h1 class="display-4">Shapes Validator</h1>
 </div>
-<h4>Add a line</h4>
-<form asp-page="Index" method="post" asp-page-handler="Line" class="form-inline">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
-            <input required="required" step="0.01" type="number" name="x1" placeholder="x1"/>
+<h4 class="text-center">Add a line</h4>
+<form asp-page="Index" method="post" asp-page-handler="Line" class="form-inline text-center">
+    <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-column m-1">
+            <input class="mb-1" required="required" step="0.01" type="number" name="x1" placeholder="x1"/>
             <input required="required" step="0.01" type="number" name="y1" placeholder="y1"/>
         </div>
-        <div class="d-flex flex-column">
-            <input required="required" step="0.01" type="number" name="x2" placeholder="x2"/>
+        <div class="d-flex flex-column m-1">
+            <input class="mb-1" required="required" step="0.01" type="number" name="x2" placeholder="x2"/>
             <input required="required" step="0.01" type="number" name="y2" placeholder="y2"/>
         </div>
     </div>
     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
-<h4>Add a circle</h4>
-<form asp-page="Index" method="post" asp-page-handler="Circle" class="form-inline">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
-            <input required="required" step="0.01" type="number" name="x" placeholder="x"/>
-            <input required="required" step="0.01" type="number" name="y" placeholder="y"/>
+<h4 class="text-center">Add a circle</h4>
+<form asp-page="Index" method="post" asp-page-handler="Circle" class="form-inline text-center">
+    <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-column m-1">
+            <input class="mb-1" required="required" step="0.01" type="number" name="x" placeholder="x"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="y" placeholder="y"/>
             <input required="required" step="0.01" type="number" name="radius" placeholder="radius"/>
         </div>
     </div>
     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
-<form asp-page="Index" method="post" asp-page-handler="Rectangle" class="form-inline">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
-            <input required="required" step="0.01" type="number" name="top" placeholder="top"/>
-            <input required="required" step="0.01" type="number" name="left" placeholder="left"/>
-            <input required="required" step="0.01" type="number" name="width" placeholder="width"/>
+<h4 class="text-center">Add a rectangle</h4>
+<form asp-page="Index" method="post" asp-page-handler="Rectangle" class="form-inline text-center">
+    <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-column m-1">
+            <input class="mb-1" required="required" step="0.01" type="number" name="top" placeholder="top"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="left" placeholder="left"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="width" placeholder="width"/>
             <input required="required" step="0.01" type="number" name="height" placeholder="height"/>
         </div>
     </div>
     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
-<form asp-page="Index" method="post" asp-page-handler="Triangle" class="form-inline">
-    <div class="d-flex flex-row">
-        <div class="d-flex flex-column">
+<h4 class="text-center">Add a triangle</h4>
+<form asp-page="Index" method="post" asp-page-handler="Triangle" class="form-inline text-center">
+    <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-column m-1">
             <label>Point 1</label>
-            <input required="required" step="0.01" type="number" name="point1.X" placeholder="X"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="point1.X" placeholder="X"/>
             <input required="required" step="0.01" type="number" name="point1.Y" placeholder="Y"/>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column m-1">
             <label>Point 2</label>
-            <input required="required" step="0.01" type="number" name="point2.X" placeholder="X"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="point2.X" placeholder="X"/>
             <input required="required" step="0.01" type="number" name="point2.Y" placeholder="Y"/>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column m-1">
             <label>Point 3</label>
-            <input required="required" step="0.01" type="number" name="point3.X" placeholder="X"/>
+            <input class="mb-1" required="required" step="0.01" type="number" name="point3.X" placeholder="X"/>
             <input required="required" step="0.01" type="number" name="point3.Y" placeholder="Y"/>
         </div>
     </div>
     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
 <div asp-validation-summary="All"></div>
-<div>
-    <a class="btn-secondary btn" asp-page-handler="TestCase">
+<div class="container justify-content-center">
+    <a class="btn-secondary btn m-2" asp-page-handler="TestCase">
         Test case
     </a>
-    <a class="btn-danger btn" asp-page-handler="Reset">
+    <a class="btn-danger btn m-2" asp-page-handler="Reset">
         Reset
     </a>
 </div>
-<a class="btn btn-success" asp-page-handler="GenerateSVG">
-    Generate Svg
-</a>
-<h4>Current Shapes</h4>
+<div class="container justify-content-center">
 
-@if (!Model.Shapes.Any())
-{
-    <p class="empty">The list is empty</p>
-}
-else
-{
-    <ul>
-        @foreach (var shape in Model.Shapes)
-        {
-            <li>
-                <p>@shape.ToString()</p>
-            </li>
-        }
-    </ul>
-}
+    <a class="btn btn-success" asp-page-handler="GenerateSVG">
+        Generate Svg
+    </a>
+</div>
+<h4 class="text-center">Current Shapes</h4>
+
+<div class="container justify-content-center">
+    @if (!Model.Shapes.Any())
+    {
+        <p class="empty">The list is empty</p>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var shape in Model.Shapes)
+            {
+                <li class="list-group-item text-center">
+                    <p>@shape.ToString()</p>
+                </li>
+            }
+        </ul>
+    }
+</div>

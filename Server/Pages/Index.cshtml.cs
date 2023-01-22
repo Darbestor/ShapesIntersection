@@ -47,11 +47,6 @@ public class IndexModel : PageModel
 
     public List<ShapeModel> Shapes { get; set; }
 
-    public void OnGet()
-    {
-        Console.WriteLine("Done!");
-    }
-
     public void OnPostLine(LineModel line)
     {
         Shapes.Add(line);
