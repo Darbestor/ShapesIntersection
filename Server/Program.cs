@@ -9,6 +9,8 @@ builder.Services.AddMemoryCache();
 builder.Services.AddTransient<ImageBuilder>();
 builder.Services.AddTransient<ImageGeneratorService>();
 builder.Services.AddSingleton<ShapesMapper>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ShapesSessionRepository>();
 
 var app = builder.Build();
 

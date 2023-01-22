@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Server.Models;
 using Server.Services;
@@ -11,8 +10,6 @@ namespace Server.Pages;
 
 public class IndexModel : PageModel
 {
-    private const string ShapesKey = "shapes";
-
     private static List<IShape> _shapes = new()
     {
         new Line(213.6f, 97, 327.6f, 154),
@@ -29,16 +26,15 @@ public class IndexModel : PageModel
         new Rectangle(281, 334.6f, 134, 134)
     };
 
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ShapesSessionRepository _shapesRepository;
 
-    private List<ShapeModel>? _shapeModels;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(ShapesSessionRepository shapesRepository)
     {
-        _logger = logger;
+        _shapesRepository = shapesRepository;
+        Shapes = _shapesRepository.GetShapes();
     }
 
-    public List<ShapeModel> Shapes => GetSessionShapes();
+    public List<ShapeModel> Shapes { get; }
 
     public void OnGet()
     {
@@ -48,25 +44,25 @@ public class IndexModel : PageModel
     public void OnPostLine(LineModel line)
     {
         Shapes.Add(line);
-        SetSessionShapes();
+        _shapesRepository.SetShapes(Shapes);
     }
 
     public void OnPostCircle(CircleModel circle)
     {
         Shapes.Add(circle);
-        SetSessionShapes();
+        _shapesRepository.SetShapes(Shapes);
     }
 
     public void OnPostRectangle(RectangleModel rectangle)
     {
         Shapes.Add(rectangle);
-        SetSessionShapes();
+        _shapesRepository.SetShapes(Shapes);
     }
 
     public void OnPostTriangle(TriangleModel triangle)
     {
         Shapes.Add(triangle);
-        SetSessionShapes();
+        _shapesRepository.SetShapes(Shapes);
     }
 
     public IActionResult OnGetGenerateSVG([FromServices] ImageGeneratorService imageGenerator,
@@ -83,24 +79,5 @@ public class IndexModel : PageModel
             FileDownloadName = "Filename.svg"
         };
         return result;
-    }
-
-    private void SetSessionShapes()
-    {
-        var serialized = JsonSerializer.Serialize(_shapeModels);
-        HttpContext.Session.SetString(ShapesKey, serialized);
-    }
-
-    private List<ShapeModel> GetSessionShapes()
-    {
-        if (_shapeModels != null)
-        {
-            return _shapeModels;
-        }
-
-        _shapeModels = HttpContext.Session.TryGetValue(ShapesKey, out var raw)
-            ? JsonSerializer.Deserialize<List<ShapeModel>>(raw)!
-            : new List<ShapeModel>();
-        return _shapeModels;
     }
 }
