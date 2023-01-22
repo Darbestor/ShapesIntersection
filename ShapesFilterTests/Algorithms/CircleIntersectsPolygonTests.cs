@@ -36,7 +36,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Polygon polygon, Circle circle)
         {
-            Assert.That(_algorithm.Intersect(circle, polygon), Is.True);
+            Assert.That(_algorithm.IsIntersect(circle, polygon), Is.True);
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -53,7 +53,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Polygon polygon, Circle circle)
         {
-            Assert.That(_algorithm.Intersect(circle, polygon), Is.True);
+            Assert.That(_algorithm.IsIntersect(circle, polygon), Is.True);
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -70,7 +70,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotIntersect(Polygon polygon, Circle circle)
         {
-            Assert.That(_algorithm.Intersect(circle, polygon), Is.False);
+            Assert.That(_algorithm.IsIntersect(circle, polygon), Is.False);
         }
     }
 }

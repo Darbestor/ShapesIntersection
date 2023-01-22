@@ -3,10 +3,16 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class RectangleIntersectsCircle : IIntersectValidator
+    /// <summary>
+    /// <see cref="Rectangle"/> to <see cref="Circle"/> intersection algorithm
+    /// </summary>
+    public class RectangleIntersectsCircle : IIntersectAlgorithm
     {
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             var shapes = new ShapeCaster<Circle, Rectangle>(shape1, shape2);
 
             // Find the closest point to the circle within the rectangle

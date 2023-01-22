@@ -3,10 +3,16 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class CircleIntersectsCircle : IIntersectValidator
+    /// <summary>
+    /// <see cref="Circle"/> to <see cref="Circle"/> intersection algorithm
+    /// </summary>
+    public class CircleIntersectsCircle : IIntersectAlgorithm
     {
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             var shapes = new ShapeCaster<Circle, Circle>(shape1, shape2);
 
             return Math.Sqrt(Math.Pow(shapes.Shape1.Center.X - shapes.Shape2.Center.X, 2) +

@@ -3,10 +3,16 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsRectangle : IIntersectValidator
+    /// <summary>
+    /// <see cref="Line"/> to <see cref="Rectangle"/> intersection algorithm
+    /// </summary>
+    public class LineIntersectsRectangle : IIntersectAlgorithm
     {
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             var shapes = new ShapeCaster<Line, Rectangle>(shape1, shape2);
 
             // Find min and max X for the segment

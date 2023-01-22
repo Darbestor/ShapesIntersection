@@ -24,7 +24,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
 
-            Assert.True(alg.Intersect(line, triangle));
+            Assert.True(alg.IsIntersect(line, triangle));
         }
 
         private static IEnumerable<TestCaseData> ContainsCases()
@@ -43,7 +43,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
 
-            Assert.True(alg.Intersect(line, triangle));
+            Assert.True(alg.IsIntersect(line, triangle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -60,7 +60,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
 
-            Assert.False(alg.Intersect(line, triangle));
+            Assert.False(alg.IsIntersect(line, triangle));
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using ShapesFilter.Algorithms;
 using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
-namespace ShapesFilter.DI
+namespace ShapesFilter.Strategy
 {
     public enum ValidatorKey
     {
@@ -20,9 +21,12 @@ namespace ShapesFilter.DI
         RectangleRectangle
     }
 
+    /// <summary>
+    /// Intersection strategy selector
+    /// </summary>
     public static class StrategySelector
     {
-        private static readonly Dictionary<ValidatorKey, IIntersectValidator> _validators;
+        private static readonly Dictionary<ValidatorKey, IIntersectAlgorithm> _validators;
 
         static StrategySelector()
         {
@@ -32,7 +36,7 @@ namespace ShapesFilter.DI
             var circlePolygon = new CircleIntersectsPolygon(new LineIntersectsCircle(new PointInsideCircle()),
                 new PointInsidePolygon());
             var rectangleCircle = new RectangleIntersectsCircle();
-            _validators = new Dictionary<ValidatorKey, IIntersectValidator>
+            _validators = new Dictionary<ValidatorKey, IIntersectAlgorithm>
             {
                 { ValidatorKey.LineLine, new LineIntersectsLine() },
                 { ValidatorKey.LineCircle, lineCircle },
@@ -50,9 +54,20 @@ namespace ShapesFilter.DI
             };
         }
 
-
-        public static IIntersectValidator GetStrategy(ShapeType shape1, ShapeType shape2)
+        /// <summary>
+        /// Get intersection algorithm based on shape types
+        /// </summary>
+        /// <param name="shape1">Type of first shape</param>
+        /// <param name="shape2">Type of second shape</param>
+        /// <returns><see cref="IIntersectAlgorithm"/></returns>
+        /// <exception cref="NotImplementedException">Intersection validator is not implemented for provided types</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Unknown types</exception>
+        public static IIntersectAlgorithm GetStrategy(ShapeType shape1, ShapeType shape2)
         {
+            if (!Enum.IsDefined(typeof(ShapeType), shape1))
+                throw new InvalidEnumArgumentException(nameof(shape1), (int)shape1, typeof(ShapeType));
+            if (!Enum.IsDefined(typeof(ShapeType), shape2))
+                throw new InvalidEnumArgumentException(nameof(shape2), (int)shape2, typeof(ShapeType));
             switch (shape1)
             {
                 case ShapeType.Line:
@@ -71,8 +86,6 @@ namespace ShapesFilter.DI
                         default:
                             throw new ArgumentOutOfRangeException(nameof(shape2), shape2, null);
                     }
-
-                    break;
                 case ShapeType.Circle:
                     switch (shape2)
                     {

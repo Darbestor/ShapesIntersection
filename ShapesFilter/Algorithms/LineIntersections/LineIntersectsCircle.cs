@@ -4,17 +4,23 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsCircle : IIntersectValidator
+    /// <summary>
+    /// <see cref="Line"/> to <see cref="Circle"/> intersection algorithm
+    /// </summary>
+    public class LineIntersectsCircle : IIntersectAlgorithm
     {
         private readonly IPointInside<Circle> _pointValidator;
 
         public LineIntersectsCircle(IPointInside<Circle> pointValidator)
         {
-            _pointValidator = pointValidator;
+            _pointValidator = pointValidator ?? throw new ArgumentNullException(nameof(pointValidator));
         }
 
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             var shapes = new ShapeCaster<Line, Circle>(shape1, shape2);
 
             // is either end INSIDE the circle?

@@ -29,7 +29,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new RectangleIntersectsCircle();
 
-            Assert.True(alg.Intersect(rect, circle));
+            Assert.True(alg.IsIntersect(rect, circle));
         }
 
         private static IEnumerable<TestCaseData> ContainsCases()
@@ -45,7 +45,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new RectangleIntersectsCircle();
 
-            Assert.True(alg.Intersect(rect, circle));
+            Assert.True(alg.IsIntersect(rect, circle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersect()
@@ -61,7 +61,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new RectangleIntersectsCircle();
 
-            Assert.False(alg.Intersect(rect, circle));
+            Assert.False(alg.IsIntersect(rect, circle));
         }
     }
 }

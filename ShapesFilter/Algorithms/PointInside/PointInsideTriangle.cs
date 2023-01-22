@@ -1,11 +1,18 @@
-﻿using ShapesFilter.Shapes;
+﻿using System;
+using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.PointInside
 {
+    /// <summary>
+    /// Check if <see cref="PointF"/> is inside<see cref="Triangle"/>
+    /// </summary>
     public class PointInsideTriangle : IPointInside<Triangle>
     {
         public bool IsInside(PointF target, Triangle shape)
         {
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (shape == null) throw new ArgumentNullException(nameof(shape));
+
             var v1 = shape.Vertices[0];
             var v2 = shape.Vertices[1];
             var v3 = shape.Vertices[2];

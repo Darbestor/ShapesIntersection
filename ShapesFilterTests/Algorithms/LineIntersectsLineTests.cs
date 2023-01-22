@@ -13,7 +13,7 @@ namespace ShapesFilterTests.Algorithms
             var l2 = new Line(20, 10, 110, 100);
 
             var alg = new LineIntersectsLine();
-            Assert.False(alg.Intersect(l1, l2));
+            Assert.False(alg.IsIntersect(l1, l2));
         }
 
         [Test]
@@ -23,11 +23,11 @@ namespace ShapesFilterTests.Algorithms
             var l2 = new Line(20, 40, 110, 50);
 
             var alg = new LineIntersectsLine();
-            Assert.True(alg.Intersect(l1, l2));
+            Assert.True(alg.IsIntersect(l1, l2));
 
 
             l2 = l1;
-            Assert.True(alg.Intersect(l1, l2));
+            Assert.True(alg.IsIntersect(l1, l2));
         }
     }
 }

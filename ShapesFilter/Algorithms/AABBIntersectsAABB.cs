@@ -1,11 +1,18 @@
-﻿using ShapesFilter.Shapes;
+﻿using System;
+using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms
 {
-    public class AABBIntersectsAABB : IIntersectValidator
+    /// <summary>
+    /// <see cref="BoundingBox"/> to <see cref="BoundingBox"/> intersection algorithm
+    /// </summary>
+    public class AABBIntersectsAABB : IIntersectAlgorithm
     {
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             var shapes = new ShapeCaster<BoundingBox, BoundingBox>(shape1, shape2);
 
             return !(shapes.Shape2.TopLeft.Y >= shapes.Shape1.BottomRight.Y ||

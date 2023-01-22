@@ -21,7 +21,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsCircle(new PointInsideCircle());
 
-            Assert.True(alg.Intersect(line, circle));
+            Assert.True(alg.IsIntersect(line, circle));
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -37,7 +37,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsCircle(new PointInsideCircle());
 
-            Assert.True(alg.Intersect(line, circle));
+            Assert.True(alg.IsIntersect(line, circle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -56,7 +56,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsCircle(new PointInsideCircle());
 
-            Assert.False(alg.Intersect(line, circle));
+            Assert.False(alg.IsIntersect(line, circle));
         }
     }
 }

@@ -1,12 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.PointInside
 {
+    /// <summary>
+    /// Check if <see cref="PointF"/> is inside <see cref="Polygon"/>
+    /// </summary>
     public class PointInsidePolygon : IPointInside<Polygon>
     {
         public bool IsInside(PointF target, Polygon shape)
         {
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (shape == null) throw new ArgumentNullException(nameof(shape));
+
             return IsInside(shape.Vertices, target);
         }
 

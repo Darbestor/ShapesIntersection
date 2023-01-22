@@ -3,10 +3,16 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.Algorithms.LineIntersections
 {
-    public class LineIntersectsLine : IIntersectValidator
+    /// <summary>
+    /// <see cref="Line"/> to <see cref="Line"/> intersection algorithm
+    /// </summary>
+    public class LineIntersectsLine : IIntersectAlgorithm
     {
-        public bool Intersect(IShape shape1, IShape shape2)
+        public bool IsIntersect(IShape shape1, IShape shape2)
         {
+            if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
+            if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
+
             if (!(shape1 is Line line1) || !(shape2 is Line line2))
             {
                 throw new ArgumentException("Wrong shapes");

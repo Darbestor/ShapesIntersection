@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ShapesFilter.DI;
 using ShapesFilter.Shapes;
+using ShapesFilter.Strategy;
 
 namespace ShapesFilter
 {
@@ -50,7 +50,7 @@ namespace ShapesFilter
                 foreach (var source in passed)
                 {
                     var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.Shape.ShapeType);
-                    if (strategy.Intersect(target.Shape, source.Shape))
+                    if (strategy.IsIntersect(target.Shape, source.Shape))
                     {
                         target.Foreground = false;
                         break;

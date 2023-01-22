@@ -21,7 +21,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsRectangle();
 
-            Assert.True(alg.Intersect(line, rectangle));
+            Assert.True(alg.IsIntersect(line, rectangle));
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace ShapesFilterTests.Algorithms
 
             var alg = new LineIntersectsRectangle();
 
-            Assert.True(alg.Intersect(line, rect));
+            Assert.True(alg.IsIntersect(line, rect));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -49,7 +49,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new LineIntersectsRectangle();
 
-            Assert.False(alg.Intersect(line, rectangle));
+            Assert.False(alg.IsIntersect(line, rectangle));
         }
     }
 }

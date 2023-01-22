@@ -26,7 +26,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new CircleIntersectsCircle();
 
-            Assert.True(alg.Intersect(c1, c2));
+            Assert.True(alg.IsIntersect(c1, c2));
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -54,7 +54,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new CircleIntersectsCircle();
 
-            Assert.True(alg.Intersect(c1, c2));
+            Assert.True(alg.IsIntersect(c1, c2));
         }
 
         private static IEnumerable<TestCaseData> DoNotOverlapCases()
@@ -76,7 +76,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new CircleIntersectsCircle();
 
-            Assert.False(alg.Intersect(c1, c2));
+            Assert.False(alg.IsIntersect(c1, c2));
         }
     }
 }

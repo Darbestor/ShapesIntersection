@@ -38,7 +38,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new AABBIntersectsAABB();
 
-            Assert.True(alg.Intersect(r1.AABB, r2.AABB));
+            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -57,7 +57,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new AABBIntersectsAABB();
 
-            Assert.True(alg.Intersect(r1.AABB, r2.AABB));
+            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -85,7 +85,7 @@ namespace ShapesFilterTests.Algorithms
         {
             var alg = new AABBIntersectsAABB();
 
-            Assert.True(alg.Intersect(r1.AABB, r2.AABB));
+            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
         }
     }
 }
