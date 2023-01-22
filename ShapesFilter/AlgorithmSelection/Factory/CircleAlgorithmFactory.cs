@@ -2,7 +2,6 @@
 using ShapesFilter.Algorithms;
 using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Algorithms.PointInside;
-using ShapesFilter.AlgorithmSelection.Strategies;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.AlgorithmSelection.Factory

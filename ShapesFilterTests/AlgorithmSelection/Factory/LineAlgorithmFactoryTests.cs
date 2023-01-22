@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using ShapesFilter.Algorithms.LineIntersections;
+using ShapesFilter.AlgorithmSelection;
 using ShapesFilter.AlgorithmSelection.Factory;
-using ShapesFilter.AlgorithmSelection.Strategies;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.AlgorithmSelection.Factory

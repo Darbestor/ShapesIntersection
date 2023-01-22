@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ShapesFilter.Algorithms;
-using ShapesFilter.AlgorithmSelection.Strategies;
 using ShapesFilter.Shapes;
 
 namespace ShapesFilter.AlgorithmSelection.Factory
