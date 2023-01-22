@@ -8,6 +8,7 @@ builder.Services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinu
 builder.Services.AddMemoryCache();
 builder.Services.AddTransient<ImageBuilder>();
 builder.Services.AddTransient<ImageGeneratorService>();
+builder.Services.AddSingleton<ShapesMapper>();
 
 var app = builder.Build();
 

@@ -64,6 +64,9 @@
     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
 <div asp-validation-summary="All"></div>
+<a class="btn btn-success" asp-page-handler="GenerateSVG">
+    Generate Svg
+</a>
 <h4>Current Shapes</h4>
 
 @if (!Model.Shapes.Any())
@@ -81,7 +84,3 @@ else
         }
     </ul>
 }
-
-<a class="btn btn-success" asp-page-handler="DownloadSVG">
-    Download CSV
-</a>

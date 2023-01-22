@@ -12,7 +12,7 @@ public class IndexModel : PageModel
 {
     private const string ShapesKey = "shapes";
 
-    private static List<IShape> _shapes = new List<IShape>
+    private static List<IShape> _shapes = new()
     {
         new Line(213.6f, 97, 327.6f, 154),
         new Triangle(new PointF(250.3f, 300.1f), new PointF(400.34f, 200.34f), new PointF(100.56f, 150.78f)),
@@ -68,10 +68,12 @@ public class IndexModel : PageModel
         SetSessionShapes();
     }
 
-    public IActionResult OnGetDownloadSVG([FromServices] ImageGeneratorService imageGenerator)
+    public IActionResult OnGetGenerateSVG([FromServices] ImageGeneratorService imageGenerator,
+        [FromServices] ShapesMapper shapesMapper)
     {
+        var shapes = shapesMapper.MapModels(Shapes);
         var filter = new Filter();
-        var tested = filter.FilterForegroundShapes(_shapes, 10);
+        var tested = filter.FilterForegroundShapes(shapes, 10);
         var t = tested.Where(x => x.Foreground).ToArray();
 
         var imageStream = imageGenerator.GetImage(tested, 1000, 1000);
