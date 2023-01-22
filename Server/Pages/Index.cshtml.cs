@@ -9,6 +9,10 @@ namespace Server.Pages;
 
 public class IndexModel : PageModel
 {
+    private const int ImageWidth = 700;
+    private const int ImageHeight = 700;
+    private const float ForegroundAreaThreshold = 10;
+
     private static List<ShapeModel> _testModels = new()
     {
         new LineModel { X1 = 213.6f, Y1 = 97, X2 = 327.6f, Y2 = 154 },
@@ -87,11 +91,10 @@ public class IndexModel : PageModel
         [FromServices] ShapesMapper shapesMapper)
     {
         var shapes = shapesMapper.MapModels(Shapes);
-        var filter = new Filter(new DefaultAlgorithmSelector());
-        var tested = filter.FilterForegroundShapes(shapes, 10);
-        //var t = tested.Where(x => x.Foreground).ToArray();
+        var filter = new Filter(new DefaultAlgorithmsPipeline());
+        var tested = filter.FilterForegroundShapes(shapes, ForegroundAreaThreshold);
 
-        var imageStream = imageGenerator.GetImage(tested, 1000, 1000);
+        var imageStream = imageGenerator.GetImage(tested, ImageWidth, ImageHeight);
         var result = new FileStreamResult(imageStream, "image/svg+xml")
         {
             FileDownloadName = "Result.svg"

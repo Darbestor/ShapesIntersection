@@ -8,7 +8,7 @@ namespace ShapesFilter.AlgorithmSelection
     /// <summary>
     ///     Algorithm selection based on shape types
     /// </summary>
-    public interface IAlgorithmSelector
+    public interface IAlgorithmsPipeline
     {
         /// <summary>
         ///     List of <see cref="AlgorithmFactory" />

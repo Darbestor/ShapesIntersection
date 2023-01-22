@@ -17,11 +17,11 @@ namespace ShapesFilter
     /// </summary>
     public class Filter
     {
-        private readonly IAlgorithmSelector _algorithmSelector;
+        private readonly IAlgorithmsPipeline _algorithmsPipeline;
 
-        public Filter(IAlgorithmSelector algorithmSelector)
+        public Filter(IAlgorithmsPipeline algorithmsPipeline)
         {
-            _algorithmSelector = algorithmSelector;
+            _algorithmsPipeline = algorithmsPipeline;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace ShapesFilter
 
                 foreach (var source in passed)
                 {
-                    var strategy = _algorithmSelector.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
+                    var strategy = _algorithmsPipeline.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
                     if (strategy == null)
                         throw new ArgumentNullException(
                             $"Algorithm for {target.Shape.ShapeType} and {source.Shape.ShapeType} not found");

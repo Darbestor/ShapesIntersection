@@ -8,9 +8,9 @@ namespace ShapesFilter.AlgorithmSelection
     /// <summary>
     ///     Default algorithm selector with predefined algorithms factories
     /// </summary>
-    public class DefaultAlgorithmSelector : IAlgorithmSelector
+    public class DefaultAlgorithmsPipeline : IAlgorithmsPipeline
     {
-        public DefaultAlgorithmSelector()
+        public DefaultAlgorithmsPipeline()
         {
             AlgorithmFactories = new List<AlgorithmFactory>
             {
