@@ -9,8 +9,8 @@ namespace ShapesFilter.Shapes
     {
         public PointF(float x, float y)
         {
-            if (x < 0) throw new ArgumentOutOfRangeException(nameof(x));
-            if (y < 0) throw new ArgumentOutOfRangeException(nameof(y));
+            if (x < 0 || !float.IsFinite(x)) throw new ArgumentOutOfRangeException(nameof(x));
+            if (y < 0 || !float.IsFinite(y)) throw new ArgumentOutOfRangeException(nameof(y));
 
             X = x;
             Y = y;
@@ -26,18 +26,6 @@ namespace ShapesFilter.Shapes
             var xComparison = X.CompareTo(other.X);
             if (xComparison != 0) return xComparison;
             return Y.CompareTo(other.Y);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is PointF other) return X.Equals(other.X) && Y.Equals(other.Y);
-
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() + Y.GetHashCode();
         }
     }
 }
