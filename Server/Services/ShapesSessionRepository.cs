@@ -6,11 +6,11 @@ namespace Server.Services;
 public class ShapesSessionRepository
 {
     private const string ShapesKey = "shapes";
-    private readonly ISession? _session;
+    private readonly ISession _session;
 
     public ShapesSessionRepository(IHttpContextAccessor contextAccessor)
     {
-        _session = contextAccessor.HttpContext?.Session;
+        _session = contextAccessor.HttpContext!.Session;
     }
 
     public void SetShapes(List<ShapeModel> shapeModels)
