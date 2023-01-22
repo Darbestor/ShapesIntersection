@@ -63,7 +63,6 @@ namespace ShapesFilter
                             $"Algorithm for {target.Shape.ShapeType} and {source.Shape.ShapeType} not found");
                     }
 
-                    //var strategy = AlgorithmSelector.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
                     if (strategy.IsIntersect(target.Shape, source.Shape))
                     {
                         target.Foreground = false;

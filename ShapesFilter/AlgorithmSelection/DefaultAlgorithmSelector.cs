@@ -5,12 +5,6 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.AlgorithmSelection
 {
-    public interface IAlgorithmSelector
-    {
-        List<AlgorithmFactory> AlgorithmFactories { get; }
-        IIntersectAlgorithm GetAlgorithm(ShapeType shapeType1, ShapeType shapeType2);
-    }
-
     public class DefaultAlgorithmSelector : IAlgorithmSelector
     {
         public DefaultAlgorithmSelector()
