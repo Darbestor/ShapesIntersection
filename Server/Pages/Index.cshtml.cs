@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Server.Models;
 using Server.Services;
 using ShapesFilter;
+using ShapesFilter.AlgorithmSelection;
 using ShapesFilter.Shapes;
 
 namespace Server.Pages;
@@ -72,8 +73,8 @@ public class IndexModel : PageModel
         [FromServices] ShapesMapper shapesMapper)
     {
         var shapes = shapesMapper.MapModels(Shapes);
-        var filter = new Filter();
-        var tested = filter.FilterForegroundShapes(shapes, 10);
+        var filter = new Filter(new DefaultAlgorithmSelector());
+        var tested = filter.FilterForegroundShapes(_shapes, 10);
         var t = tested.Where(x => x.Foreground).ToArray();
 
         var imageStream = imageGenerator.GetImage(tested, 1000, 1000);

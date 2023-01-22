@@ -6,7 +6,7 @@ using ShapesFilter.Algorithms.LineIntersections;
 using ShapesFilter.Algorithms.PointInside;
 using ShapesFilter.Shapes;
 
-namespace ShapesFilter.Strategy
+namespace ShapesFilter.AlgorithmSelection
 {
     public enum ValidatorKey
     {
@@ -24,11 +24,11 @@ namespace ShapesFilter.Strategy
     /// <summary>
     /// Intersection strategy selector
     /// </summary>
-    public static class StrategySelector
+    public static class AlgorithmSelector
     {
         private static readonly Dictionary<ValidatorKey, IIntersectAlgorithm> _validators;
 
-        static StrategySelector()
+        static AlgorithmSelector()
         {
             var lineCircle = new LineIntersectsCircle(new PointInsideCircle());
             var lineRectangle = new LineIntersectsRectangle();
@@ -62,7 +62,7 @@ namespace ShapesFilter.Strategy
         /// <returns><see cref="IIntersectAlgorithm"/></returns>
         /// <exception cref="NotImplementedException">Intersection validator is not implemented for provided types</exception>
         /// <exception cref="ArgumentOutOfRangeException">Unknown types</exception>
-        public static IIntersectAlgorithm GetStrategy(ShapeType shape1, ShapeType shape2)
+        public static IIntersectAlgorithm GetAlgorithm(ShapeType shape1, ShapeType shape2)
         {
             if (!Enum.IsDefined(typeof(ShapeType), shape1))
                 throw new InvalidEnumArgumentException(nameof(shape1), (int)shape1, typeof(ShapeType));

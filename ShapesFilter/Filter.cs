@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ShapesFilter.AlgorithmSelection;
 using ShapesFilter.Shapes;
-using ShapesFilter.Strategy;
 
 namespace ShapesFilter
 {
@@ -17,6 +17,13 @@ namespace ShapesFilter
     /// </summary>
     public class Filter
     {
+        private readonly IAlgorithmSelector _algorithmSelector;
+
+        public Filter(IAlgorithmSelector algorithmSelector)
+        {
+            _algorithmSelector = algorithmSelector;
+        }
+
         /// <summary>
         /// Process all the shapes and mark foreground shapes
         /// </summary>
@@ -49,7 +56,14 @@ namespace ShapesFilter
 
                 foreach (var source in passed)
                 {
-                    var strategy = StrategySelector.GetStrategy(target.Shape.ShapeType, source.Shape.ShapeType);
+                    var strategy = _algorithmSelector.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
+                    if (strategy == null)
+                    {
+                        throw new ArgumentNullException(
+                            $"Algorithm for {target.Shape.ShapeType} and {source.Shape.ShapeType} not found");
+                    }
+
+                    //var strategy = AlgorithmSelector.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
                     if (strategy.IsIntersect(target.Shape, source.Shape))
                     {
                         target.Foreground = false;
