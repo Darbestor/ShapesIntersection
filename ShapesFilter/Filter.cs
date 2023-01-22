@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ShapesFilter.AlgorithmSelection;
 using ShapesFilter.Shapes;
 
@@ -37,11 +36,8 @@ namespace ShapesFilter
             if (threshold < 0) throw new ArgumentOutOfRangeException(nameof(threshold));
             if (shapes.Count == 0) return new List<FilteredShape>();
 
-            var passed = new List<FilteredShape>
-            {
-                new FilteredShape { Shape = shapes.Last(), Foreground = true }
-            };
-            for (var i = shapes.Count - 2; i >= 0; i--)
+            var passed = new List<FilteredShape>();
+            for (var i = shapes.Count - 1; i >= 0; i--)
             {
                 var target = new FilteredShape { Shape = shapes[i] };
                 if (target.Shape.Area < threshold)
