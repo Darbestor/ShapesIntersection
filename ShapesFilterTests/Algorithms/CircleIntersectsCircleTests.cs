@@ -5,8 +5,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class CircleIntersectsCircleTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new CircleIntersectsCircle();
+        }
+
+        private CircleIntersectsCircle _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(
@@ -24,9 +33,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Circle c1, Circle c2)
         {
-            var alg = new CircleIntersectsCircle();
-
-            Assert.True(alg.IsIntersect(c1, c2));
+            Assert.True(_algorithm.IsIntersect(c1, c2));
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -52,9 +59,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Circle c1, Circle c2)
         {
-            var alg = new CircleIntersectsCircle();
-
-            Assert.True(alg.IsIntersect(c1, c2));
+            Assert.True(_algorithm.IsIntersect(c1, c2));
         }
 
         private static IEnumerable<TestCaseData> DoNotOverlapCases()
@@ -74,9 +79,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotOverlapCases))]
         public void TestDoNotOverlap(Circle c1, Circle c2)
         {
-            var alg = new CircleIntersectsCircle();
-
-            Assert.False(alg.IsIntersect(c1, c2));
+            Assert.False(_algorithm.IsIntersect(c1, c2));
         }
     }
 }

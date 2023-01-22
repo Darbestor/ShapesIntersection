@@ -5,8 +5,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class LineIntersectsRectangleTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new LineIntersectsRectangle();
+        }
+
+        private LineIntersectsRectangle _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(new Line(150, 0, 150, 150), new Rectangle(100, 100, 100, 100));
@@ -19,9 +28,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Line line, Rectangle rectangle)
         {
-            var alg = new LineIntersectsRectangle();
-
-            Assert.True(alg.IsIntersect(line, rectangle));
+            Assert.True(_algorithm.IsIntersect(line, rectangle));
         }
 
         [Test]
@@ -30,10 +37,7 @@ namespace ShapesFilterTests.Algorithms
             var line = new Line(120, 110, 170, 180);
             var rect = new Rectangle(100, 100, 100, 100);
 
-
-            var alg = new LineIntersectsRectangle();
-
-            Assert.True(alg.IsIntersect(line, rect));
+            Assert.True(_algorithm.IsIntersect(line, rect));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -47,9 +51,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotIntersect(Line line, Rectangle rectangle)
         {
-            var alg = new LineIntersectsRectangle();
-
-            Assert.False(alg.IsIntersect(line, rectangle));
+            Assert.False(_algorithm.IsIntersect(line, rectangle));
         }
     }
 }

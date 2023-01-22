@@ -5,8 +5,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class RectangleIntersectsCircleTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new RectangleIntersectsCircle();
+        }
+
+        private RectangleIntersectsCircle _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(
@@ -27,9 +36,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Rectangle rect, Circle circle)
         {
-            var alg = new RectangleIntersectsCircle();
-
-            Assert.True(alg.IsIntersect(rect, circle));
+            Assert.True(_algorithm.IsIntersect(rect, circle));
         }
 
         private static IEnumerable<TestCaseData> ContainsCases()
@@ -43,9 +50,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestContains(Rectangle rect, Circle circle)
         {
-            var alg = new RectangleIntersectsCircle();
-
-            Assert.True(alg.IsIntersect(rect, circle));
+            Assert.True(_algorithm.IsIntersect(rect, circle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersect()
@@ -59,9 +64,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersect))]
         public void TestDoNotIntersect(Rectangle rect, Circle circle)
         {
-            var alg = new RectangleIntersectsCircle();
-
-            Assert.False(alg.IsIntersect(rect, circle));
+            Assert.False(_algorithm.IsIntersect(rect, circle));
         }
     }
 }

@@ -6,8 +6,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class LineIntersectsTriangleTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
+        }
+
+        private LineIntersectsTriangle _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(new Line(0, 0, 100, 150),
@@ -22,9 +31,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Line line, Triangle triangle)
         {
-            var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
-
-            Assert.True(alg.IsIntersect(line, triangle));
+            Assert.True(_algorithm.IsIntersect(line, triangle));
         }
 
         private static IEnumerable<TestCaseData> ContainsCases()
@@ -41,9 +48,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(ContainsCases))]
         public void TestContains(Line line, Triangle triangle)
         {
-            var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
-
-            Assert.True(alg.IsIntersect(line, triangle));
+            Assert.True(_algorithm.IsIntersect(line, triangle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -58,9 +63,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotContains(Line line, Triangle triangle)
         {
-            var alg = new LineIntersectsTriangle(new LineIntersectsLine(), new PointInsideTriangle());
-
-            Assert.False(alg.IsIntersect(line, triangle));
+            Assert.False(_algorithm.IsIntersect(line, triangle));
         }
     }
 }

@@ -6,8 +6,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class LineIntersectsCircleTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new LineIntersectsCircle(new PointInsideCircle());
+        }
+
+        private LineIntersectsCircle _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(new Line(50, 50, 100, 100), new Circle(new PointF(100, 100), 50));
@@ -35,9 +44,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Line line, Circle circle)
         {
-            var alg = new LineIntersectsCircle(new PointInsideCircle());
-
-            Assert.True(alg.IsIntersect(line, circle));
+            Assert.True(_algorithm.IsIntersect(line, circle));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -54,9 +61,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(DoNotIntersectCases))]
         public void TestDoNotIntersect(Line line, Circle circle)
         {
-            var alg = new LineIntersectsCircle(new PointInsideCircle());
-
-            Assert.False(alg.IsIntersect(line, circle));
+            Assert.False(_algorithm.IsIntersect(line, circle));
         }
     }
 }

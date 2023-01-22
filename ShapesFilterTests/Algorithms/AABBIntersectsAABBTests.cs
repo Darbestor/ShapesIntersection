@@ -5,8 +5,17 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilterTests.Algorithms
 {
+    [TestFixture]
     public class AABBIntersectsAABBTests
     {
+        [SetUp]
+        public void Setup()
+        {
+            _algorithm = new AABBIntersectsAABB();
+        }
+
+        private AABBIntersectsAABB _algorithm;
+
         private static IEnumerable<TestCaseData> IntersectCases()
         {
             yield return new TestCaseData(
@@ -36,9 +45,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(IntersectCases))]
         public void TestIntersect(Rectangle r1, Rectangle r2)
         {
-            var alg = new AABBIntersectsAABB();
-
-            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
+            Assert.True(_algorithm.IsIntersect(r1.AABB, r2.AABB));
         }
 
         private static IEnumerable<TestCaseData> InsideCases()
@@ -55,9 +62,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestInside(Rectangle r1, Rectangle r2)
         {
-            var alg = new AABBIntersectsAABB();
-
-            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
+            Assert.True(_algorithm.IsIntersect(r1.AABB, r2.AABB));
         }
 
         private static IEnumerable<TestCaseData> DoNotIntersectCases()
@@ -83,9 +88,7 @@ namespace ShapesFilterTests.Algorithms
         [TestCaseSource(nameof(InsideCases))]
         public void TestDoNotIntersect(Rectangle r1, Rectangle r2)
         {
-            var alg = new AABBIntersectsAABB();
-
-            Assert.True(alg.IsIntersect(r1.AABB, r2.AABB));
+            Assert.True(_algorithm.IsIntersect(r1.AABB, r2.AABB));
         }
     }
 }
