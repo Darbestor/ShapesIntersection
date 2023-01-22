@@ -23,7 +23,7 @@ Build application:
 ```dotnet build```  
 
 Start web application:  
-```dotnet run --project ./Server/Server.csproj```  
+```dotnet run --project ./WebApp/WebApp.csproj```  
 
 Open *http://localhost:5263* in your browser
 
