@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms.PointInside
 {
     /// <summary>
-    /// Check if <see cref="PointF"/> is inside <see cref="Circle"/>
+    ///     Check if <see cref="PointF" /> is inside <see cref="Circle" />
     /// </summary>
     public class PointInsideCircle : IPointInside<Circle>
     {

@@ -7,7 +7,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.AlgorithmSelection.Factory
 {
     /// <summary>
-    /// Algorithm factory for <see cref="Rectangle"/> intersections check
+    ///     Algorithm factory for <see cref="Rectangle" /> intersections check
     /// </summary>
     public class RectangleAlgorithmFactory : AlgorithmFactory
     {

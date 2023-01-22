@@ -9,7 +9,6 @@ public class ShapesMapper
     {
         var mapped = new List<IShape>(models.Count);
         foreach (var model in models)
-        {
             switch (model)
             {
                 case LineModel line:
@@ -30,7 +29,6 @@ public class ShapesMapper
                 default:
                     throw new ArgumentOutOfRangeException(nameof(model), "Unknown model");
             }
-        }
 
         return mapped;
     }

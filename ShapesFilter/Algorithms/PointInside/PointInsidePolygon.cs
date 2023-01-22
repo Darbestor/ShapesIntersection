@@ -5,7 +5,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms.PointInside
 {
     /// <summary>
-    /// Check if <see cref="PointF"/> is inside <see cref="Polygon"/>
+    ///     Check if <see cref="PointF" /> is inside <see cref="Polygon" />
     /// </summary>
     public class PointInsidePolygon : IPointInside<Polygon>
     {

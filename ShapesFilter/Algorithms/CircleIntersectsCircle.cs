@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms
 {
     /// <summary>
-    /// <see cref="Circle"/> to <see cref="Circle"/> intersection algorithm
+    ///     <see cref="Circle" /> to <see cref="Circle" /> intersection algorithm
     /// </summary>
     public class CircleIntersectsCircle : IIntersectAlgorithm
     {

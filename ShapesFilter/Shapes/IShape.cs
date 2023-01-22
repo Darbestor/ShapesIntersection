@@ -1,17 +1,17 @@
 ﻿namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Base shape
+    ///     Base shape
     /// </summary>
     public interface IShape
     {
         /// <summary>
-        /// Shape area
+        ///     Shape area
         /// </summary>
         float Area { get; }
 
         /// <summary>
-        /// Type of shape
+        ///     Type of shape
         /// </summary>
         ShapeType ShapeType { get; }
     }

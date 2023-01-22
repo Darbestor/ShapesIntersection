@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms
 {
     /// <summary>
-    /// <see cref="BoundingBox"/> to <see cref="BoundingBox"/> intersection algorithm
+    ///     <see cref="BoundingBox" /> to <see cref="BoundingBox" /> intersection algorithm
     /// </summary>
     public class AABBIntersectsAABB : IIntersectAlgorithm
     {

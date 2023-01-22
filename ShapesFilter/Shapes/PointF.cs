@@ -3,7 +3,7 @@
 namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// 2D point
+    ///     2D point
     /// </summary>
     public class PointF : IComparable<PointF>
     {

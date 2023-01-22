@@ -3,7 +3,7 @@
 namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Rectangle
+    ///     Rectangle
     /// </summary>
     public class Rectangle : Polygon
     {

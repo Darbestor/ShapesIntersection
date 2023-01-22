@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms.LineIntersections
 {
     /// <summary>
-    /// <see cref="Line"/> to <see cref="Rectangle"/> intersection algorithm
+    ///     <see cref="Line" /> to <see cref="Rectangle" /> intersection algorithm
     /// </summary>
     public class LineIntersectsRectangle : IIntersectAlgorithm
     {

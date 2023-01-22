@@ -1,7 +1,7 @@
 ﻿namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Shape type identifier
+    ///     Shape type identifier
     /// </summary>
     public enum ShapeType
     {

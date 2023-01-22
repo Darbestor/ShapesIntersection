@@ -6,7 +6,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.AlgorithmSelection.Factory
 {
     /// <summary>
-    /// Algorithm factory with intersection strategies for specified shape
+    ///     Algorithm factory with intersection strategies for specified shape
     /// </summary>
     public abstract class AlgorithmFactory
     {
@@ -18,7 +18,7 @@ namespace ShapesFilter.AlgorithmSelection.Factory
         }
 
         /// <summary>
-        /// Add new strategy
+        ///     Add new strategy
         /// </summary>
         /// <param name="strategy"></param>
         public void AddStrategy(IntersectStrategy strategy)
@@ -27,7 +27,7 @@ namespace ShapesFilter.AlgorithmSelection.Factory
         }
 
         /// <summary>
-        /// Return strategy if factory has it for specified types  
+        ///     Return strategy if factory has it for specified types
         /// </summary>
         /// <param name="shapeType1">shape type</param>
         /// <param name="shapeType2">shape type</param>

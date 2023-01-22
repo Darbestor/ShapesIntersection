@@ -34,7 +34,7 @@ public class IndexModel : PageModel
         new LineModel { X1 = 296.6f, Y1 = 393, X2 = 553.6f, Y2 = 280 },
         new CircleModel { X = 188.6f, Y = 346.5f, Radius = 48 },
         new LineModel { X1 = 655.6f, Y1 = 45, X2 = 665.6f, Y2 = 557 },
-        new RectangleModel { Top = 281, Left = 334.6f, Width = 134, Height = 134 },
+        new RectangleModel { Top = 281, Left = 334.6f, Width = 134, Height = 134 }
     };
 
     private readonly ShapesSessionRepository _shapesRepository;
@@ -97,7 +97,7 @@ public class IndexModel : PageModel
         //var t = tested.Where(x => x.Foreground).ToArray();
 
         var imageStream = imageGenerator.GetImage(tested, 1000, 1000);
-        FileStreamResult result = new FileStreamResult(imageStream, "image/svg+xml")
+        var result = new FileStreamResult(imageStream, "image/svg+xml")
         {
             FileDownloadName = "Result.svg"
         };

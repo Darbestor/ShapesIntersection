@@ -7,7 +7,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms
 {
     /// <summary>
-    /// <see cref="Polygon"/> to <see cref="Polygon"/> intersection algorithm
+    ///     <see cref="Polygon" /> to <see cref="Polygon" /> intersection algorithm
     /// </summary>
     public class PolygonIntersectsPolygon : IIntersectAlgorithm
     {
@@ -39,7 +39,7 @@ namespace ShapesFilter.Algorithms
         }
 
         /// <summary>
-        /// Check for edges intersection
+        ///     Check for edges intersection
         /// </summary>
         /// <param name="p1">polygon</param>
         /// <param name="p2">polygon</param>

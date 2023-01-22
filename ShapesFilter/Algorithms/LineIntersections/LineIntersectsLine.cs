@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms.LineIntersections
 {
     /// <summary>
-    /// <see cref="Line"/> to <see cref="Line"/> intersection algorithm
+    ///     <see cref="Line" /> to <see cref="Line" /> intersection algorithm
     /// </summary>
     public class LineIntersectsLine : IIntersectAlgorithm
     {
@@ -13,10 +13,7 @@ namespace ShapesFilter.Algorithms.LineIntersections
             if (shape1 == null) throw new ArgumentNullException(nameof(shape1));
             if (shape2 == null) throw new ArgumentNullException(nameof(shape2));
 
-            if (!(shape1 is Line line1) || !(shape2 is Line line2))
-            {
-                throw new ArgumentException("Wrong shapes");
-            }
+            if (!(shape1 is Line line1) || !(shape2 is Line line2)) throw new ArgumentException("Wrong shapes");
 
             return Intersect(line1.P1, line1.P2, line2.P1, line2.P2);
         }

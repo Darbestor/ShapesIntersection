@@ -1,7 +1,7 @@
 ﻿namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Polygon
+    ///     Polygon
     /// </summary>
     public abstract class Polygon : IShape
     {
@@ -13,7 +13,7 @@
         public PointF[] Vertices { get; }
 
         /// <summary>
-        /// <inheritdoc cref="BoundingBox"/>
+        ///     <inheritdoc cref="BoundingBox" />
         /// </summary>
         public abstract BoundingBox AABB { get; }
 

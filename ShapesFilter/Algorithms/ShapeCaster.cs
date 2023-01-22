@@ -4,7 +4,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.Algorithms
 {
     /// <summary>
-    /// Cast interfaces to shapes, provided by generic parameters
+    ///     Cast interfaces to shapes, provided by generic parameters
     /// </summary>
     /// <typeparam name="S1">First shape type</typeparam>
     /// <typeparam name="S2">Second shape type</typeparam>

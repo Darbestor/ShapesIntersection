@@ -13,7 +13,7 @@ namespace ShapesFilter
     }
 
     /// <summary>
-    /// Filter foreground shapes
+    ///     Filter foreground shapes
     /// </summary>
     public class Filter
     {
@@ -25,7 +25,7 @@ namespace ShapesFilter
         }
 
         /// <summary>
-        /// Process all the shapes and mark foreground shapes
+        ///     Process all the shapes and mark foreground shapes
         /// </summary>
         /// <param name="shapes"></param>
         /// <param name="threshold">Minimal area for foreground shape </param>
@@ -35,14 +35,11 @@ namespace ShapesFilter
         {
             if (shapes == null) throw new ArgumentNullException(nameof(shapes));
             if (threshold < 0) throw new ArgumentOutOfRangeException(nameof(threshold));
-            if (shapes.Count == 0)
-            {
-                return new List<FilteredShape>();
-            }
+            if (shapes.Count == 0) return new List<FilteredShape>();
 
             var passed = new List<FilteredShape>
             {
-                new FilteredShape { Shape = shapes.Last(), Foreground = true },
+                new FilteredShape { Shape = shapes.Last(), Foreground = true }
             };
             for (var i = shapes.Count - 2; i >= 0; i--)
             {
@@ -58,10 +55,8 @@ namespace ShapesFilter
                 {
                     var strategy = _algorithmSelector.GetAlgorithm(target.Shape.ShapeType, source.Shape.ShapeType);
                     if (strategy == null)
-                    {
                         throw new ArgumentNullException(
                             $"Algorithm for {target.Shape.ShapeType} and {source.Shape.ShapeType} not found");
-                    }
 
                     if (strategy.IsIntersect(target.Shape, source.Shape))
                     {

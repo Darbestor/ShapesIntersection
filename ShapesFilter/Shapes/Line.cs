@@ -1,7 +1,7 @@
 ﻿namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Line
+    ///     Line
     /// </summary>
     public class Line : IShape
     {

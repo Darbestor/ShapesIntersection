@@ -6,7 +6,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.AlgorithmSelection
 {
     /// <summary>
-    /// Default algorithm selector with predefined algorithms factories
+    ///     Default algorithm selector with predefined algorithms factories
     /// </summary>
     public class DefaultAlgorithmSelector : IAlgorithmSelector
     {
@@ -27,12 +27,8 @@ namespace ShapesFilter.AlgorithmSelection
         public IIntersectAlgorithm GetAlgorithm(ShapeType shapeType1, ShapeType shapeType2)
         {
             foreach (var factory in AlgorithmFactories)
-            {
                 if (factory.TryGetStrategy(shapeType1, shapeType2, out var algorithm))
-                {
                     return algorithm;
-                }
-            }
 
             return null;
         }

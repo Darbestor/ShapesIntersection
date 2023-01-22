@@ -3,7 +3,7 @@
 namespace ShapesFilter.Shapes
 {
     /// <summary>
-    /// Circle
+    ///     Circle
     /// </summary>
     public class Circle : IShape
     {

@@ -7,7 +7,7 @@ using ShapesFilter.Shapes;
 namespace ShapesFilter.AlgorithmSelection.Factory
 {
     /// <summary>
-    /// Algorithm factory for <see cref="Line"/> intersections check
+    ///     Algorithm factory for <see cref="Line" /> intersections check
     /// </summary>
     public class LineAlgorithmFactory : AlgorithmFactory
     {

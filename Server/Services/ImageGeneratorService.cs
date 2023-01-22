@@ -18,7 +18,6 @@ public class ImageGeneratorService
         _builder.Height = height;
 
         foreach (var shape in shapes)
-        {
             switch (shape.Shape)
             {
                 case Line line:
@@ -36,7 +35,6 @@ public class ImageGeneratorService
                 default:
                     throw new ArgumentOutOfRangeException(nameof(shape.Shape), "Unknown shape");
             }
-        }
 
         return _builder.Build();
     }

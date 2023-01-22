@@ -7,9 +7,9 @@ namespace Server.Services;
 
 public class ImageBuilder
 {
-    private static readonly SvgColourServer ForegroundColor = new SvgColourServer(Color.Green);
-    private static readonly SvgColourServer StrokeColor = new SvgColourServer(Color.Black);
-    private SvgGroup _svgGroup;
+    private static readonly SvgColourServer ForegroundColor = new(Color.Green);
+    private static readonly SvgColourServer StrokeColor = new(Color.Black);
+    private readonly SvgGroup _svgGroup;
 
     public ImageBuilder()
     {
@@ -21,7 +21,7 @@ public class ImageBuilder
 
     public void AddLine(Line line, bool foreground)
     {
-        _svgGroup.Children.Add(new SvgLine()
+        _svgGroup.Children.Add(new SvgLine
         {
             StartX = line.P1.X,
             StartY = line.P1.Y,
@@ -33,7 +33,7 @@ public class ImageBuilder
 
     public void AddCircle(Circle circle, bool foreground)
     {
-        _svgGroup.Children.Add(new SvgCircle()
+        _svgGroup.Children.Add(new SvgCircle
         {
             CenterX = circle.Center.X,
             CenterY = circle.Center.Y,
@@ -45,7 +45,7 @@ public class ImageBuilder
 
     public void AddRectangle(Rectangle rectangle, bool foreground)
     {
-        _svgGroup.Children.Add(new SvgRectangle()
+        _svgGroup.Children.Add(new SvgRectangle
         {
             X = rectangle.TopLeft.X,
             Y = rectangle.TopLeft.Y,
@@ -61,7 +61,7 @@ public class ImageBuilder
         var points = new SvgPointCollection();
         var units = triangle.Vertices.Select(v => new SvgUnit[] { new(v.X), new(v.Y) }).SelectMany(x => x);
         points.AddRange(units);
-        _svgGroup.Children.Add(new SvgPolygon()
+        _svgGroup.Children.Add(new SvgPolygon
         {
             Points = points,
             Fill = foreground ? ForegroundColor : null,
@@ -71,9 +71,9 @@ public class ImageBuilder
 
     public Stream Build()
     {
-        MemoryStream memoryStream = new MemoryStream();
+        var memoryStream = new MemoryStream();
 
-        var svg = new SvgDocument()
+        var svg = new SvgDocument
         {
             Width = Width,
             Height = Height,
