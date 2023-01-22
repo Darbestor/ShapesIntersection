@@ -4,26 +4,37 @@ using Server.Models;
 using Server.Services;
 using ShapesFilter;
 using ShapesFilter.AlgorithmSelection;
-using ShapesFilter.Shapes;
 
 namespace Server.Pages;
 
 public class IndexModel : PageModel
 {
-    private static List<IShape> _shapes = new()
+    private static List<ShapeModel> _testModels = new()
     {
-        new Line(213.6f, 97, 327.6f, 154),
-        new Triangle(new PointF(250.3f, 300.1f), new PointF(400.34f, 200.34f), new PointF(100.56f, 150.78f)),
-        new Triangle(new PointF(340.1f, 500.1f), new PointF(500.4f, 600.34f), new PointF(400.56f, 450.78f)),
-        new Rectangle(121, 58.6f, 505, 348),
-        new Rectangle(65, 78.6f, 174, 118),
-        new Circle(new PointF(241.1f, 224.5f), 48),
-        new Triangle(new PointF(50.3f, 86.1f), new PointF(100.34f, 82.34f), new PointF(34.56f, 56.78f)),
-        new Rectangle(192, 293.6f, 79, 40),
-        new Line(296.6f, 393, 553.6f, 280),
-        new Circle(new PointF(188.6f, 346.5f), 48),
-        new Line(655.6f, 45, 665.6f, 557),
-        new Rectangle(281, 334.6f, 134, 134)
+        new LineModel { X1 = 213.6f, Y1 = 97, X2 = 327.6f, Y2 = 154 },
+        new TriangleModel
+        {
+            Point1 = new Point { X = 250.3f, Y = 300.1f }, Point2 = new Point { X = 400.34f, Y = 200.34f },
+            Point3 = new Point { X = 100.56f, Y = 150.78f }
+        },
+        new TriangleModel
+        {
+            Point1 = new Point { X = 340.1f, Y = 500.1f }, Point2 = new Point { X = 500.4f, Y = 600.34f },
+            Point3 = new Point { X = 400.56f, Y = 450.78f }
+        },
+        new RectangleModel { Top = 121, Left = 58.6f, Width = 505, Height = 348 },
+        new RectangleModel { Top = 65, Left = 78.6f, Width = 174, Height = 118 },
+        new CircleModel { X = 241.1f, Y = 224.5f, Radius = 48 },
+        new TriangleModel
+        {
+            Point1 = new Point { X = 50.3f, Y = 86.1f }, Point2 = new Point { X = 100.34f, Y = 82.34f },
+            Point3 = new Point { X = 34.56f, Y = 56.78f }
+        },
+        new RectangleModel { Top = 192, Left = 293.6f, Width = 79, Height = 40 },
+        new LineModel { X1 = 296.6f, Y1 = 393, X2 = 553.6f, Y2 = 280 },
+        new CircleModel { X = 188.6f, Y = 346.5f, Radius = 48 },
+        new LineModel { X1 = 655.6f, Y1 = 45, X2 = 665.6f, Y2 = 557 },
+        new RectangleModel { Top = 281, Left = 334.6f, Width = 134, Height = 134 },
     };
 
     private readonly ShapesSessionRepository _shapesRepository;
@@ -34,7 +45,7 @@ public class IndexModel : PageModel
         Shapes = _shapesRepository.GetShapes();
     }
 
-    public List<ShapeModel> Shapes { get; }
+    public List<ShapeModel> Shapes { get; set; }
 
     public void OnGet()
     {
@@ -65,18 +76,30 @@ public class IndexModel : PageModel
         _shapesRepository.SetShapes(Shapes);
     }
 
+    public void OnGetTestCase()
+    {
+        Shapes = _testModels;
+        _shapesRepository.SetShapes(Shapes);
+    }
+
+    public void OnGetReset()
+    {
+        Shapes.Clear();
+        _shapesRepository.ClearShapes();
+    }
+
     public IActionResult OnGetGenerateSVG([FromServices] ImageGeneratorService imageGenerator,
         [FromServices] ShapesMapper shapesMapper)
     {
         var shapes = shapesMapper.MapModels(Shapes);
         var filter = new Filter(new DefaultAlgorithmSelector());
-        var tested = filter.FilterForegroundShapes(_shapes, 10);
-        var t = tested.Where(x => x.Foreground).ToArray();
+        var tested = filter.FilterForegroundShapes(shapes, 10);
+        //var t = tested.Where(x => x.Foreground).ToArray();
 
         var imageStream = imageGenerator.GetImage(tested, 1000, 1000);
         FileStreamResult result = new FileStreamResult(imageStream, "image/svg+xml")
         {
-            FileDownloadName = "Filename.svg"
+            FileDownloadName = "Result.svg"
         };
         return result;
     }
