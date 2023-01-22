@@ -7,6 +7,9 @@ using ShapesFilter.Shapes;
 
 namespace ShapesFilter.AlgorithmSelection.Factory
 {
+    /// <summary>
+    /// Algorithm factory for <see cref="Rectangle"/> intersections check
+    /// </summary>
     public class RectangleAlgorithmFactory : AlgorithmFactory
     {
         public override bool TryGetStrategy(ShapeType shapeType1, ShapeType shapeType2,
