@@ -11,7 +11,7 @@ Supported shapes:
 ## Application structure
 | Project | Description |
 | ------------ | ------------------- |
-| Server | Example web application that creates shapes and generating SVG image. |
+| WebApp | Example web application that creates shapes and generating SVG image. |
 | ShapesFilter | Library - providing foreground shape detector and various algorithms for shapes intersection. |
 | ShapesFilterTests | Unit tests for ShapesFilter |
 
@@ -28,7 +28,7 @@ Start web application:
 Open *http://localhost:5263* in your browser
 
 ## Project description
-### Server
+### WebApp
 Example web application to showcase foreground detection library in action.
 
 #### Capabilities
@@ -39,6 +39,8 @@ Example web application to showcase foreground detection library in action.
 
 #### Settings
 Height, width and foreground area threshold can be set in *Server/Pages/Index.cshtml.cs*
+
+  
 
 ### ShapesFilter
 Library that provides intersection algorithms and detecting foreground shapes
