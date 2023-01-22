@@ -9,7 +9,7 @@ namespace ShapesFilter.Shapes
     {
         public Circle(PointF center, float radius)
         {
-            if (radius < 0) throw new ArgumentException("Radius must be > 0");
+            if (radius < float.Epsilon) throw new ArgumentException("Radius must be > 0");
 
             Center = center;
             Radius = radius;

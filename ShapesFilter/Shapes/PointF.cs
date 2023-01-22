@@ -9,6 +9,9 @@ namespace ShapesFilter.Shapes
     {
         public PointF(float x, float y)
         {
+            if (x < 0) throw new ArgumentOutOfRangeException(nameof(x));
+            if (y < 0) throw new ArgumentOutOfRangeException(nameof(y));
+
             X = x;
             Y = y;
         }

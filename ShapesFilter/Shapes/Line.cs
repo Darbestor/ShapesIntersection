@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShapesFilter.Shapes
+﻿namespace ShapesFilter.Shapes
 {
     /// <summary>
     /// Line
@@ -24,19 +22,5 @@ namespace ShapesFilter.Shapes
 
         public float Area { get; }
         public ShapeType ShapeType => ShapeType.Line;
-
-
-        public override bool Equals(object obj)
-        {
-            var other = obj as Line;
-            if (other == null) return false;
-
-            return P1.Equals(other.P1) && P2.Equals(other.P2);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(P1, P2);
-        }
     }
 }
