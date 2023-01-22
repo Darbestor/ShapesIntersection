@@ -1,5 +1,5 @@
 # Foreground Shapes filter
-![foreground](foregroundImage.png)
+![foreground](foregroundImage.jpg)
 Application that can recognize foreground shapes (in physical order)  
 
 Supported shapes:  
